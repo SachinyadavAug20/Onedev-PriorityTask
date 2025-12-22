@@ -27,7 +27,7 @@ The application keeps the interface minimal and distraction-free, making it suit
 
 ---
 
-## 🚀 Planned Features (MVP)
+## 🚀 Planned Features
 
 - Create tasks with priority levels (On a co-ordinate system of urgent V/S important)
 - Mark tasks as completed
@@ -49,4 +49,7 @@ The application keeps the interface minimal and distraction-free, making it suit
 ![Preview 21 Dec](Documentations/Screenshots_and_gifs/1.png)
 
 ---
+## Inspration artical
+
+### [Artical on Eisenhower Matrix](https://asana.com/resources/eisenhower-matrix)
 

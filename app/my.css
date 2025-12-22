@@ -4,3 +4,6 @@
 .FONT_ON_PAGE{
   font-family: "Poppins", sans-serif;
 }
+*{
+    transition: all ease-in-out 150ms;
+}
