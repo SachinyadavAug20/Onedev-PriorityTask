@@ -27,6 +27,16 @@ The application keeps the interface minimal and distraction-free, making it suit
 
 ---
 
+## 📅 Project Status
+
+### as on 22 Dec 2025
+![Preview 22 Dec](Documentations/Screenshots_and_gifs/2.png)
+
+
+### Started on 21 Dec 2025
+![Preview 21 Dec](Documentations/Screenshots_and_gifs/1.png)
+
+---
 ## 🚀 Planned Features
 
 - Create tasks with priority levels (On a co-ordinate system of urgent V/S important)
@@ -43,12 +53,6 @@ The application keeps the interface minimal and distraction-free, making it suit
 
 ---
 
-## 📅 Project Status
-
-### Started on 21 Dec 2025
-![Preview 21 Dec](Documentations/Screenshots_and_gifs/1.png)
-
----
 ## Inspration artical
 
 ### [Artical on Eisenhower Matrix](https://asana.com/resources/eisenhower-matrix)
