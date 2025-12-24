@@ -1,37 +1,112 @@
+"use client";
 import { v4 as uuidv4 } from 'uuid';
-const TodoQuadrant = ({Todos, setTodos, inputs, setInputs, section, n}) => {
+import { closestCenter, DndContext } from '@dnd-kit/core';
+import { restrictToVerticalAxis, restrictToWindowEdges } from '@dnd-kit/modifiers';
+import { arrayMove, SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable';
+import dynamic from 'next/dynamic';
+
+// Dynamic import to prevent SSR of draggable components
+const TodoCard = dynamic(() => import('./TodoCard'), {
+    ssr: false,
+    loading: () => <div className="bg-blue-500/10 mx-2 my-1 backdrop-blur-lg rounded-xl shadow-2xl p-4 animate-pulse">
+        <div className="h-4 bg-gray-300 rounded-full rounded-l-none w-2/4"></div>
+    </div>
+});
+
+const TodoQuadrant = ({ Todos, setTodos, inputs, setInputs, section, n }) => {
+
+    const handleDrag = (event) => {
+        const { active, over } = event;
+        if (!over) return;
+        const activeId = active.id;
+        const overId = over.id;
+        if (activeId === overId) return;
+        const oldIndex = Todos[section].findIndex(task => task.id === activeId);
+        const newIndex = Todos[section].findIndex(task => task.id === overId);
+
+        const reorderedTodos = arrayMove(Todos[section], oldIndex, newIndex);
+
+        setTodos({
+            ...Todos,
+            [section]: reorderedTodos
+        });
+    };
     return (
         <div className=" flex flex-col h-full justify-between">
             <div className="TODOS flex flex-col gap-1 overflow-auto">
-                {Todos[section].map((todo) => {
-                    return (
-                        <div key={todo.id} className="bg-white/10 backdrop-blur-lg rounded-xl shadow-2xl p-4 flex justify-between items-center hover:bg-white/20 hover:shadow-3xl transition-all duration-300">
-                            <div className="flex items-center space-x-2">
-                                <input type="checkbox" checked={todo.isDone} onChange={() => {
-                                    setTodos({
-                                        ...Todos,
-                                        [section]: Todos[section].map((item) =>
-                                            item.id === todo.id ? { ...item, isDone: !item.isDone } : item
-                                        )
-                                    })
-                                }} className="w-5 h-5 accent-yellow-600 bg-white/10 border border-white/30 rounded-lg focus:ring-2 focus:ring-white/50 hover:bg-white/20 transition-all duration-200" />
-                                <span className={`text-heading text-base hover:font-bold ${todo.isDone ? 'line-through text-gray-500' : ''}`}>{todo.title}</span>
+                {/* Drag and drop functionality */}
+                <DndContext
+                    onDragEnd={handleDrag}
+                    collisionDetection={closestCenter}
+                    modifiers={[restrictToVerticalAxis, restrictToWindowEdges]}
+                >
+                    <SortableContext items={Todos[section]} strategy={verticalListSortingStrategy}> {/*Verticl*/}
+                        {Todos[section].length == 0 ?
+                            <div className="flex flex-col items-center h-screen justify-center p-6 text-center bg-white/5 backdrop-blur-sm rounded-xl border border-white/20">
+                                {section === 'Imp_Urg' && (
+                                    <>
+                                        <div className="text-2xl flex items-center font-bold text-red-700 mb-2">
+                                            <lord-icon
+                                                className="w-13 h-13"
+                                                src="https://cdn.lordicon.com/pilfbsjh.json"
+                                                trigger="hover"
+                                            >
+                                            </lord-icon>
+                                            Add Urgent Tasks</div>
+                                        <div className="text-sm text-gray-300">Tasks that need immediate attention and are critically important</div>
+                                    </>
+                                )}
+                                {section === 'nImp_Urg' && (
+                                    <>
+                                        <div className="text-2xl flex items-center font-bold text-orange-700 mb-2">
+                                            <lord-icon
+                                                src="https://cdn.lordicon.com/zjuyeglr.json"
+                                                trigger="hover"
+                                                stroke="bold"
+                                                className="w-13 h-13"
+                                            >
+                                            </lord-icon>
+                                            Add Time-Sensitive Tasks</div>
+                                        <div className="text-sm text-gray-300">Tasks that need to be done soon but aren't necessarily important</div>
+                                    </>
+                                )}
+                                {section === 'Imp_nUrg' && (
+                                    <>
+                                        <div className="text-2xl flex items-center font-bold text-yellow-700 mb-2">
+                                            <lord-icon
+                                                src="https://cdn.lordicon.com/peulpjhz.json"
+                                                trigger="hover"
+                                                className="w-13 h-13"
+                                                stroke="bold"
+                                            >
+                                            </lord-icon>
+                                            Add Important Tasks</div>
+                                        <div className="text-sm text-gray-300">Tasks that matter long-term but don't require immediate action</div>
+                                    </>
+                                )}
+                                {section === 'nImp_nUrg' && (
+                                    <>
+                                        <div className="text-2xl flex items-center font-bold text-gray-700 mb-2">
+                                            <lord-icon
+                                                src="https://cdn.lordicon.com/geqlkran.json"
+                                                trigger="morph"
+                                                state="morph-circle"
+                                                className="w-13 h-13"
+                                            >
+                                            </lord-icon>
+                                            Add Optional Tasks</div>
+                                        <div className="text-sm text-gray-300">Tasks that would be nice to do when you have extra time</div>
+                                    </>
+                                )}
                             </div>
-                            <div className="flex space-x-2">
-                                <button onClick={() => {
-                                    setInputs({ ...inputs, [n]: todo.title })
-                                    setTodos({ ...Todos, [section]: Todos[section].filter((i) => { return i.id !== todo.id }) })
-                                }} className="bg-transparent border border-white/60 rounded-lg px-3 py-1 text-sm hover:bg-white/30 transition">Edit</button>
-                                <button onClick={() => {
-                                    setTodos({
-                                        ...Todos,
-                                        [section]: Todos[section].filter((item) => item.id !== todo.id)
-                                    })
-                                }} className="bg-transparent border border-white/60 rounded-lg px-3 py-1 text-sm hover:bg-red-600/40 transition">Delete</button>
-                            </div>
-                        </div>
-                    );
-                })}
+                            : Todos[section].map((todo) => {
+                                return (
+                                    < TodoCard key={todo.id} todo={todo} section={section} Todos={Todos} setTodos={setTodos} inputs={inputs} setInputs={setInputs} n={n} />
+                                );
+                            })
+                        }
+                    </SortableContext>
+                </DndContext>
 
             </div>
             <div>

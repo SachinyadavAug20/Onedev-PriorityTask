@@ -12,24 +12,31 @@ const Navbar = ({ mode, setMode }) => {
                         </div>
                     </div>
                 </Link>
-                
-
-                <div onClick={() => { mode == "dark" ? setMode("light") : setMode("dark") }} className="MODE_BTN cursor-pointer">
-                    {mode == "dark" ?
-                        <lord-icon
-                            src="https://cdn.lordicon.com/xhadprfj.json"
-                            trigger="hover"
-                            className="w-15 h-15"
-                        >
-                        </lord-icon>
-                        :
-                        <lord-icon
-                            src="https://cdn.lordicon.com/skywiydo.json"
-                            trigger="hover"
-                            className="w-15 h-15"
-                        >
-                        </lord-icon>
-                    }
+                <div className="flex items-center gap-2">
+                    <lord-icon
+                        src="https://cdn.lordicon.com/laobovmg.json"
+                        trigger="hover"
+                         colors="primary:#000000,secondary:#30e849,tertiary:#000000,quaternary:#f24c00,quinary:#f9c9c0"
+                        className="w-13 h-13"
+                    >
+                    </lord-icon>
+                    <div onClick={() => { mode == "dark" ? setMode("light") : setMode("dark") }} className="MODE_BTN cursor-pointer">
+                        {mode == "dark" ?
+                            <lord-icon
+                                src="https://cdn.lordicon.com/xhadprfj.json"
+                                trigger="hover"
+                                className="w-15 h-15"
+                            >
+                            </lord-icon>
+                            :
+                            <lord-icon
+                                src="https://cdn.lordicon.com/skywiydo.json"
+                                trigger="hover"
+                                className="w-15 h-15"
+                            >
+                            </lord-icon>
+                        }
+                    </div>
                 </div>
 
             </div>
