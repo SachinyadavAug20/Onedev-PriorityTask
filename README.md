@@ -29,6 +29,9 @@ The application keeps the interface minimal and distraction-free, making it suit
 
 ## 📅 Project Status
 
+### as on 24 Dec 2025
+![Preview 24 Dec](Documentations/Screenshots_and_gifs/4.gif)
+
 ### as on 23 Dec 2025
 ![Preview 23 Dec](Documentations/Screenshots_and_gifs/3.png)
 
