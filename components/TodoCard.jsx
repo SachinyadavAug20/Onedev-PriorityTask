@@ -1,7 +1,7 @@
 "use client";
 import { useSortable } from "@dnd-kit/sortable"
 import { CSS } from "@dnd-kit/utilities";
-const TodoCard = ({ todo, Todos, setTodos, inputs, setInputs, n, section }) => {
+const TodoCard = ({ todo, date, Todos, setTodos, inputs, setInputs, n, section }) => {
     const {
         attributes,
         listeners,
@@ -24,24 +24,30 @@ const TodoCard = ({ todo, Todos, setTodos, inputs, setInputs, n, section }) => {
                 <input type="checkbox" checked={todo.isDone} onChange={() => {
                     setTodos({
                         ...Todos,
-                        [section]: Todos[section].map((item) =>
-                            item.id === todo.id ? { ...item, isDone: !item.isDone } : item
-                        )
+                        [date]: {
+                            ...Todos[date],
+                            [section]: Todos[date][section].map((item) =>
+                                item.id === todo.id ? { ...item, isDone: !item.isDone } : item
+                            )
+                        }
                     })
-                }} className="w-5 h-5 accent-yellow-600 bg-white/10 border border-white/30 rounded-lg focus:ring-2 focus:ring-white/50 hover:bg-white/20 transition-all duration-200" />
+                }} className="w-5 h-5 accent-green-600 bg-white/10 border border-white/30 rounded-full focus:ring-2 focus:ring-white/50 hover:bg-white/20 transition-all duration-200" />
                 <span className={`text-heading text-base hover:font-bold ${todo.isDone ? 'line-through text-gray-500' : ''}`}>{todo.title}</span>
             </div>
-            <div className="flex space-x-2">
+            <div className="flex  space-x-2">
                 <button onClick={() => {
                     setInputs({ ...inputs, [n]: todo.title })
-                    setTodos({ ...Todos, [section]: Todos[section].filter((i) => { return i.id !== todo.id }) })
-                }} className="bg-transparent border border-white/60 rounded-lg px-3 py-1 text-sm hover:bg-white/30 transition">Edit</button>
+                    setTodos({ ...Todos, [date]: { ...Todos[date], [section]: Todos[date][section].filter((i) => { return i.id !== todo.id }) } })
+                }} className="bg-transparent cursor-pointer border border-white/60 rounded-lg px-3 py-1 text-sm hover:bg-white/30 transition">Edit</button>
                 <button onClick={() => {
                     setTodos({
                         ...Todos,
-                        [section]: Todos[section].filter((item) => item.id !== todo.id)
+                        [date]: {
+                            ...Todos[date],
+                            [section]: Todos[date][section].filter((item) => item.id !== todo.id)
+                        }
                     })
-                }} className="bg-transparent border border-white/60 rounded-lg px-3 py-1 text-sm hover:bg-red-600/40 transition">Delete</button>
+                }} className="bg-transparent border cursor-pointer border-white/60 rounded-lg px-3 py-1 text-sm hover:bg-red-600/40 transition">Delete</button>
             </div>
         </div>
 

@@ -13,7 +13,7 @@ const TodoCard = dynamic(() => import('./TodoCard'), {
     </div>
 });
 
-const TodoQuadrant = ({ Todos, setTodos, inputs, setInputs, section, n }) => {
+const TodoQuadrant = ({ Todos, setTodos, inputs, setInputs, section, n, date }) => {
 
     const handleDrag = (event) => {
         const { active, over } = event;
@@ -21,14 +21,17 @@ const TodoQuadrant = ({ Todos, setTodos, inputs, setInputs, section, n }) => {
         const activeId = active.id;
         const overId = over.id;
         if (activeId === overId) return;
-        const oldIndex = Todos[section].findIndex(task => task.id === activeId);
-        const newIndex = Todos[section].findIndex(task => task.id === overId);
+        const oldIndex = Todos[date][section].findIndex(task => task.id === activeId);
+        const newIndex = Todos[date][section].findIndex(task => task.id === overId);
 
-        const reorderedTodos = arrayMove(Todos[section], oldIndex, newIndex);
+        const reorderedTodos = arrayMove(Todos[date][section], oldIndex, newIndex);
 
         setTodos({
             ...Todos,
-            [section]: reorderedTodos
+            [date]: {
+                ...Todos[date],
+                [section]: reorderedTodos
+            }
         });
     };
     return (
@@ -40,8 +43,8 @@ const TodoQuadrant = ({ Todos, setTodos, inputs, setInputs, section, n }) => {
                     collisionDetection={closestCenter}
                     modifiers={[restrictToVerticalAxis, restrictToWindowEdges]}
                 >
-                    <SortableContext items={Todos[section]} strategy={verticalListSortingStrategy}> {/*Verticl*/}
-                        {Todos[section].length == 0 ?
+                    <SortableContext items={Todos[date]?.[section] || []} strategy={verticalListSortingStrategy}> {/*Verticl*/}
+                        {(Todos[date]?.[section]?.length || 0) == 0 ?
                             <div className="flex flex-col items-center h-screen justify-center p-6 text-center bg-white/5 backdrop-blur-sm rounded-xl border border-white/20">
                                 {section === 'Imp_Urg' && (
                                     <>
@@ -67,7 +70,7 @@ const TodoQuadrant = ({ Todos, setTodos, inputs, setInputs, section, n }) => {
                                             >
                                             </lord-icon>
                                             Add Time-Sensitive Tasks</div>
-                                        <div className="text-sm text-gray-300">Tasks that need to be done soon but aren't necessarily important</div>
+                                        <div className="text-sm text-gray-300">Tasks that need to be done soon but aren&apos;t necessarily important</div>
                                     </>
                                 )}
                                 {section === 'Imp_nUrg' && (
@@ -81,7 +84,7 @@ const TodoQuadrant = ({ Todos, setTodos, inputs, setInputs, section, n }) => {
                                             >
                                             </lord-icon>
                                             Add Important Tasks</div>
-                                        <div className="text-sm text-gray-300">Tasks that matter long-term but don't require immediate action</div>
+                                        <div className="text-sm text-gray-300">Tasks that matter long-term but don&apos;t require immediate action</div>
                                     </>
                                 )}
                                 {section === 'nImp_nUrg' && (
@@ -99,9 +102,9 @@ const TodoQuadrant = ({ Todos, setTodos, inputs, setInputs, section, n }) => {
                                     </>
                                 )}
                             </div>
-                            : Todos[section].map((todo) => {
+                            : Todos[date][section].map((todo) => {
                                 return (
-                                    < TodoCard key={todo.id} todo={todo} section={section} Todos={Todos} setTodos={setTodos} inputs={inputs} setInputs={setInputs} n={n} />
+                                    < TodoCard key={todo.id} todo={todo} date={date} section={section} Todos={Todos} setTodos={setTodos} inputs={inputs} setInputs={setInputs} n={n} />
                                 );
                             })
                         }
@@ -117,7 +120,7 @@ const TodoQuadrant = ({ Todos, setTodos, inputs, setInputs, section, n }) => {
                         }} className="block w-full ps-9 pe-3 py-2.5 border-0 border-white/30 text-heading text-base rounded-lg focus:ring-brand focus:border-brand shadow-xl placeholder:text-xl hover:font-bold" placeholder="Add a todo" />
                         <lord-icon
                             onClick={(() => {
-                                setTodos({ ...Todos, [section]: [{ id: uuidv4(), title: inputs[n], isDone: false }, ...Todos[section]] })
+                                setTodos({ ...Todos, [date]: { ...Todos[date], [section]: [{ id: uuidv4(), title: inputs[n], isDone: false }, ...Todos[date][section]] } })
                                 setInputs({ ...inputs, [n]: "" })
                             })}
                             src="https://cdn.lordicon.com/navborva.json"
