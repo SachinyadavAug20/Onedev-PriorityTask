@@ -18,6 +18,20 @@ There is a need for a simple system that:
 
 ---
 
+## 💡 Project Status
+
+### what works : 
+#### 1. going back and forward dates
+
+### what broken : 
+#### 1.Adding any todo except for today gives error
+
+### what plan : 
+#### 1.Fix section in all date 
+
+---
+
+
 ## 💡 Solution
 
 PriorityTask introduces a **priority-first workflow** where tasks are organized based on their importance.  
