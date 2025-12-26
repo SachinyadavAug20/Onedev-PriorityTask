@@ -1,7 +1,7 @@
 "use client"
 import './my.css'
 import Navbar from "@/components/Navbar";
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Todo_matrix from '@/components/Todo_matrix';
 
 export default function Home() {
@@ -15,25 +15,46 @@ export default function Home() {
     const [mode, setMode] = useState("dark")
     const [Todos, setTodos] = useState({
         [formattedDate]: {
-
-            Imp_Urg: [
-                { id: 1, title: "Wash the dishes", isDone: false },
-                { id: 2, title: "Complete the report", isDone: false }
-            ],
-            nImp_Urg: [
-                { id: 3, title: "Read the latest book", isDone: false },
-                { id: 4, title: "Organize the desk", isDone: false }
-            ],
-            Imp_nUrg: [
-                { id: 5, title: "Exercise for 30 minutes", isDone: false },
-                { id: 6, title: "Plan next week’s meals", isDone: false }
-            ],
-            nImp_nUrg: [
-                { id: 7, title: "Watch a movie", isDone: false },
-                { id: 8, title: "Go for a walk", isDone: false }
-            ]
+            Imp_Urg: [],
+            nImp_Urg: [],
+            Imp_nUrg: [],
+            nImp_nUrg: []
         }
     })
+    useEffect(() => {
+        const savedTodos = localStorage.getItem('Todos');
+        if (savedTodos) {
+            try {
+                const parsed = JSON.parse(savedTodos);
+                // Ensure current date exists, add if missing
+                const currentDate = formattedDate;
+                if (!parsed[currentDate]) {
+                    parsed[currentDate] = {
+                        Imp_Urg: [],
+                        nImp_Urg: [],
+                        Imp_nUrg: [],
+                        nImp_nUrg: []
+                    };
+                }
+                setTodos(parsed);
+            } catch (error) {
+                console.error('Error loading todos:', error);
+                // Set default empty state on error
+                setTodos({
+                    [formattedDate]: {
+                        Imp_Urg: [],
+                        nImp_Urg: [],
+                        Imp_nUrg: [],
+                        nImp_nUrg: []
+                    }
+                });
+            }
+        }
+    }, []);
+    // useEffect(() => {
+    //     localStorage.setItem('Todos', JSON.stringify(Todos));
+    // }, [Todos]);
+
     return (
         <>
             <script src="https://cdn.lordicon.com/lordicon.js"></script>

@@ -5,19 +5,21 @@ import TodoQuadrant from "./TodoQuadrant";
 const Todo_matrix = ({ Todos, date1, setTodos }) => {
     const [inputs, setInputs] = useState({ i1: "", i2: "", i3: "", i4: "" })
     const [currentDate, setCurrentDate] = useState(date1)
+    const dateString = currentDate;
+    const date = new Date(dateString);
 
     return (
         <>
             <div className="flex items-center justify-evenly g-10">
                 <div className="rotate-180 cursor-pointer" onClick={() => {
 
-                    const dateString = currentDate;
-                    const date = new Date(dateString);
                     date.setDate(date.getDate() - 1);
                     const newDateString = date.toISOString().split('T')[0];
-                    console.log(newDateString);
                     setCurrentDate(newDateString)
+                    if (!Todos.hasOwnProperty(newDateString)) {
 
+                        setTodos({ ...Todos, [newDateString]: {} })
+                    }
                 }}>
                     <lord-icon
                         src="https://cdn.lordicon.com/hsetlwbn.json"
@@ -32,13 +34,13 @@ const Todo_matrix = ({ Todos, date1, setTodos }) => {
                 </div>
                 <div className="cursor-pointer" onClick={() => {
 
-                    const dateString = currentDate;
-                    const date = new Date(dateString);
                     date.setDate(date.getDate() + 1);
                     const newDateString = date.toISOString().split('T')[0];
-                    console.log(newDateString);
                     setCurrentDate(newDateString)
+                    if (!Todos.hasOwnProperty(newDateString)) {
 
+                        setTodos({ ...Todos, [newDateString]: {} })
+                    }
                 }}>
                     <lord-icon
                         src="https://cdn.lordicon.com/hsetlwbn.json"

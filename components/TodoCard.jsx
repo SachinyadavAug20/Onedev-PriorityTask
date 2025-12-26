@@ -19,7 +19,7 @@ const TodoCard = ({ todo, date, Todos, setTodos, inputs, setInputs, n, section }
 
     return (
 
-        <div ref={setNodeRef} key={todo.id} {...attributes} {...listeners} style={style} className="bg-white/10 backdrop-blur-lg rounded-xl shadow-2xl p-4 flex justify-between items-center hover:bg-white/20 hover:shadow-3xl transition-all duration-300">
+        <div ref={setNodeRef} key={todo.id} {...attributes} {...listeners} style={style} className="bg-white/10 backdrop-blur-lg rounded-xl shadow-2xl p-4 flex justify-between items-center hover:bg-white/20 hover:shadow-3xl mx-1 my-0.5 transition-all duration-300">
             <div className="flex items-center space-x-2" >
                 <input type="checkbox" checked={todo.isDone} onChange={() => {
                     setTodos({
@@ -38,6 +38,7 @@ const TodoCard = ({ todo, date, Todos, setTodos, inputs, setInputs, n, section }
                 <button onClick={() => {
                     setInputs({ ...inputs, [n]: todo.title })
                     setTodos({ ...Todos, [date]: { ...Todos[date], [section]: Todos[date][section].filter((i) => { return i.id !== todo.id }) } })
+                    localStorage.setItem('Todos', JSON.stringify({ ...Todos, [date]: { ...Todos[date], [section]: Todos[date][section].filter((i) => { return i.id !== todo.id }) } }))
                 }} className="bg-transparent cursor-pointer border border-white/60 rounded-lg px-3 py-1 text-sm hover:bg-white/30 transition">Edit</button>
                 <button onClick={() => {
                     setTodos({
@@ -47,6 +48,14 @@ const TodoCard = ({ todo, date, Todos, setTodos, inputs, setInputs, n, section }
                             [section]: Todos[date][section].filter((item) => item.id !== todo.id)
                         }
                     })
+
+                    localStorage.setItem('Todos', JSON.stringify({
+                        ...Todos,
+                        [date]: {
+                            ...Todos[date],
+                            [section]: Todos[date][section].filter((item) => item.id !== todo.id)
+                        }
+                    }))
                 }} className="bg-transparent border cursor-pointer border-white/60 rounded-lg px-3 py-1 text-sm hover:bg-red-600/40 transition">Delete</button>
             </div>
         </div>

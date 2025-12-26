@@ -18,16 +18,16 @@ There is a need for a simple system that:
 
 ---
 
-## 💡 Project Status
+##  Project Status
 
 ### what works : 
-#### 1. going back and forward dates
+####  going back and forward dates
 
 ### what broken : 
-#### 1.Adding any todo except for today gives error
+#### Adding any todo except for today gives error
 
 ### what plan : 
-#### 1.Fix section in all date 
+#### Fix section in all date 
 
 ---
 
