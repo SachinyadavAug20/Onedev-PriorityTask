@@ -1,4 +1,5 @@
 "use client";
+import { useState, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { closestCenter, DndContext } from '@dnd-kit/core';
 import { restrictToVerticalAxis, restrictToWindowEdges } from '@dnd-kit/modifiers';
@@ -8,12 +9,26 @@ import dynamic from 'next/dynamic';
 // Dynamic import to prevent SSR of draggable components
 const TodoCard = dynamic(() => import('./TodoCard'), {
     ssr: false,
-    loading: () => <div className="bg-blue-500/10 mx-2 my-1 backdrop-blur-lg rounded-xl shadow-2xl p-4 animate-pulse">
-        <div className="h-4 bg-gray-300 rounded-full rounded-l-none w-2/4"></div>
-    </div>
+    loading: () => (
+        <div className="bg-white/10 backdrop-blur-lg rounded-xl shadow-2xl p-2 sm:p-3 lg:p-4 flex justify-between items-center mx-0 sm:mx-0.5 lg:mx-1 my-0.5 transition-all duration-300 animate-pulse">
+            <div className="flex items-center space-x-2">
+                <div className="w-5 h-5 bg-gray-300 rounded-full"></div>
+                <div className="h-4 bg-gray-300 rounded w-32"></div>
+            </div>
+            <div className="flex space-x-0.5 sm:space-x-1 lg:space-x-2">
+                <div className="w-8 h-6 bg-gray-300 rounded"></div>
+                <div className="w-8 h-6 bg-gray-300 rounded"></div>
+            </div>
+        </div>
+    )
 });
 
 const TodoQuadrant = ({ Todos, setTodos, inputs, setInputs, section, n, date }) => {
+    const [mounted, setMounted] = useState(false);
+
+    useEffect(() => {
+        setMounted(true);
+    }, []);
 
     const handleDrag = (event) => {
         const { active, over } = event;
@@ -34,28 +49,75 @@ const TodoQuadrant = ({ Todos, setTodos, inputs, setInputs, section, n, date }) 
             }
         });
     };
+
+    if (!mounted) {
+        // Render loading skeleton on server and initial client render
+        return (
+            <div className="flex flex-col h-full justify-between">
+                <div className="TODOS flex mx-0.5 sm:mx-1 lg:mx-2 py-1 sm:py-2 px-0.5 sm:px-1 h-full my-0.5 sm:my-1 flex-col gap-0.5 sm:gap-1 overflow-auto">
+                    <div className="flex flex-col items-center h-20 sm:h-24 lg:h-32 justify-center p-3 sm:p-4 lg:p-6 text-center bg-white/5 backdrop-blur-sm rounded-xl border border-white/20">
+                        <div className="text-2xl font-bold text-gray-400 mb-2">Loading...</div>
+                    </div>
+                </div>
+                <div className="relative flex justify-center border-2 py-0.5 sm:py-1 border-black items-center bg-white/10 backdrop-blur-lg rounded-lg sm:rounded-xl shadow-xl sm:shadow-2xl hover:bg-white/20 hover:shadow-2xl sm:hover:shadow-3xl transition-all duration-300 mx-0.5 sm:mx-0 lg:mx-0">
+                    <input type="text" id="input-group-1" value={inputs[n]} onChange={(e) => {
+                        setInputs({ ...inputs, [n]: e.target.value })
+                    }}
+                        onKeyDown={(e) => {
+                            if (e.key === 'Enter') {
+                                console.log(Todos)
+                                if (!Todos[date].hasOwnProperty(section)) {
+                                    setTodos({ ...Todos, [date]: { ...Todos[date], [section]: [] } })
+                                }
+                                setTodos({ ...Todos, [date]: { ...Todos[date], [section]: [{ id: uuidv4(), title: inputs[n], isDone: false }, ...Todos[date][section]] } })
+                                setInputs({ ...inputs, [n]: "" })
+                                localStorage.setItem('Todos', JSON.stringify({ ...Todos, [date]: { ...Todos[date], [section]: [{ id: uuidv4(), title: inputs[n], isDone: false }, ...Todos[date][section]] } }))
+                            }
+                        }}
+                        className="block w-full ps-6 pe-2 py-1.5 sm:py-2 text-xs sm:text-base border-0 border-white/30 text-heading rounded-lg focus:ring-brand focus:border-brand shadow-lg sm:shadow-xl placeholder:text-sm sm:placeholder:text-xl hover:font-bold" placeholder="Add a todo" />
+                    <lord-icon
+                        onClick={(() => {
+                            console.log(Todos)
+                            if (!Todos[date].hasOwnProperty(section)) {
+                                setTodos({ ...Todos, [date]: { ...Todos[date], [section]: [] } })
+                            }
+                            setTodos({ ...Todos, [date]: { ...Todos[date], [section]: [{ id: uuidv4(), title: inputs[n], isDone: false }, ...Todos[date][section]] } })
+                            setInputs({ ...inputs, [n]: "" })
+                            localStorage.setItem('Todos', JSON.stringify({ ...Todos, [date]: { ...Todos[date], [section]: [{ id: uuidv4(), title: inputs[n], isDone: false }, ...Todos[date][section]] } }))
+                        })}
+                        src="https://cdn.lordicon.com/navborva.json"
+                        colors="primary:#121331,secondary:#000000"
+                        trigger="hover"
+                        className="absolute right-0 w-8 h-8 sm:w-10 sm:h-10 lg:w-15 lg:h-15"
+                    >
+                    </lord-icon>
+                </div>
+            </div>
+        );
+    }
+
     return (
-        <div className=" flex flex-col h-full justify-between">
-            <div className="TODOS flex mx-2 py-2 px-1 h-full my-1 flex-col gap-1 overflow-auto">
-                {/* Drag and drop functionality */}
+        <>
+            <div className="flex flex-col h-full justify-between">
+            <div className="TODOS flex mx-0.5 sm:mx-1 lg:mx-2 py-1 sm:py-2 px-0.5 sm:px-1 flex-1 my-0.5 sm:my-1 flex-col gap-0.5 sm:gap-1 overflow-auto">
                 <DndContext
                     onDragEnd={handleDrag}
                     collisionDetection={closestCenter}
                     modifiers={[restrictToVerticalAxis, restrictToWindowEdges]}
                 >
-                    <SortableContext items={Todos[date]?.[section] || []} strategy={verticalListSortingStrategy}> {/*Verticl*/}
-                        {(Todos[date]?.[section]?.length || 0) == 0 ?
-                            <div className="flex flex-col items-center h-screen justify-center p-6 text-center bg-white/5 backdrop-blur-sm rounded-xl border border-white/20">
+                    <SortableContext items={Todos[date]?.[section] || []} strategy={verticalListSortingStrategy}>
+                        {(Todos[date]?.[section]?.length || 0) == 0 ? (
+                            <div className="flex flex-col items-center h-20 sm:h-24 lg:h-32 justify-center p-3 sm:p-4 lg:p-6 text-center bg-white/5 backdrop-blur-sm rounded-xl border border-white/20">
                                 {section === 'Imp_Urg' && (
                                     <>
                                         <div className="text-2xl flex items-center font-bold text-red-700 mb-2">
                                             <lord-icon
-                                                className="w-13 h-13"
                                                 src="https://cdn.lordicon.com/pilfbsjh.json"
                                                 trigger="hover"
-                                            >
-                                            </lord-icon>
-                                            Add Urgent Tasks</div>
+                                                className="w-13 h-13"
+                                            ></lord-icon>
+                                            Add Urgent Tasks
+                                        </div>
                                         <div className="text-sm text-gray-300">Tasks that need immediate attention and are critically important</div>
                                     </>
                                 )}
@@ -67,10 +129,10 @@ const TodoQuadrant = ({ Todos, setTodos, inputs, setInputs, section, n, date }) 
                                                 trigger="hover"
                                                 stroke="bold"
                                                 className="w-13 h-13"
-                                            >
-                                            </lord-icon>
-                                            Add Time-Sensitive Tasks</div>
-                                        <div className="text-sm text-gray-300">Tasks that need to be done soon but aren&apos;t necessarily important</div>
+                                            ></lord-icon>
+                                            Add Time-Sensitive Tasks
+                                        </div>
+                                        <div className="text-sm text-gray-300">Tasks that need to be done soon but aren't necessarily important</div>
                                     </>
                                 )}
                                 {section === 'Imp_nUrg' && (
@@ -81,10 +143,10 @@ const TodoQuadrant = ({ Todos, setTodos, inputs, setInputs, section, n, date }) 
                                                 trigger="hover"
                                                 className="w-13 h-13"
                                                 stroke="bold"
-                                            >
-                                            </lord-icon>
-                                            Add Important Tasks</div>
-                                        <div className="text-sm text-gray-300">Tasks that matter long-term but don&apos;t require immediate action</div>
+                                            ></lord-icon>
+                                            Add Important Tasks
+                                        </div>
+                                        <div className="text-sm text-gray-300">Tasks that matter long-term but don't require immediate action</div>
                                     </>
                                 )}
                                 {section === 'nImp_nUrg' && (
@@ -93,67 +155,91 @@ const TodoQuadrant = ({ Todos, setTodos, inputs, setInputs, section, n, date }) 
                                             <lord-icon
                                                 src="https://cdn.lordicon.com/geqlkran.json"
                                                 trigger="morph"
-                                                state="morph-circle"
                                                 className="w-13 h-13"
-                                            >
-                                            </lord-icon>
-                                            Add Optional Tasks</div>
+                                            ></lord-icon>
+                                            Add Optional Tasks
+                                        </div>
                                         <div className="text-sm text-gray-300">Tasks that would be nice to do when you have extra time</div>
                                     </>
                                 )}
                             </div>
-                            : Todos[date][section].map((todo) => {
-                                return (
-                                    < TodoCard key={todo.id} todo={todo} date={date} section={section} Todos={Todos} setTodos={setTodos} inputs={inputs} setInputs={setInputs} n={n} />
-                                );
-                            })
-                        }
+                        ) : (
+                            Todos[date][section].map((todo) => (
+                                <TodoCard key={todo.id} todo={todo} date={date} section={section} Todos={Todos} setTodos={setTodos} inputs={inputs} setInputs={setInputs} n={n} />
+                            ))
+                        )}
                     </SortableContext>
                 </DndContext>
-
             </div>
-            <div>
-                <div>
-                    <div className="relative mx-1 my-2 flex justify-center border-2 py-1 border-black items-center bg-white/10 backdrop-blur-lg rounded-xl shadow-2xl hover:bg-white/20 hover:shadow-3xl transition-all duration-300">
-                        <input type="text" id="input-group-1" value={inputs[n]} onChange={(e) => {
-                            setInputs({ ...inputs, [n]: e.target.value })
-                        }}
-                            onKeyDown={(e) => {
-                                if (e.key === 'Enter') {
-                                    console.log(Todos)
-                                    if (!Todos[date].hasOwnProperty(section)) {
-                                        Todos = { ...Todos, [date]: { ...Todos[date], [section]: [] } }
-                                    }
-                                    setTodos({ ...Todos, [date]: { ...Todos[date], [section]: [{ id: uuidv4(), title: inputs[n], isDone: false }, ...Todos[date][section]] } })
-                                    setInputs({ ...inputs, [n]: "" })
-                                    localStorage.setItem('Todos', JSON.stringify({ ...Todos, [date]: { ...Todos[date], [section]: [{ id: uuidv4(), title: inputs[n], isDone: false }, ...Todos[date][section]] } }))
-                                }
 
-                            }}
-                            className="block w-full ps-9 pe-3 py-2.5 border-0 border-white/30 text-heading text-base rounded-lg focus:ring-brand focus:border-brand shadow-xl placeholder:text-xl hover:font-bold" placeholder="Add a todo" />
-                        <lord-icon
-                            onClick={(() => {
-                                console.log(Todos)
-                                if (!Todos[date].hasOwnProperty(section)) {
-                                    setTodos({ ...Todos, [date]: { ...Todos[date], [section]: [] } })
-                                }
+            <div className="relative mx-0.5 flex justify-center border-2 py-0.5 sm:py-1 border-black items-center bg-white/10 backdrop-blur-lg rounded-lg sm:rounded-xl shadow-xl sm:shadow-2xl hover:bg-white/20 hover:shadow-2xl sm:hover:shadow-3xl transition-all duration-300">
+                <input type="text" id="input-group-1" value={inputs[n]} onChange={(e) => {
+                    setInputs({ ...inputs, [n]: e.target.value })
+                }}
+                    onKeyDown={(e) => {
+                        if (e.key === 'Enter') {
+                            console.log(Todos)
+                            if (!Todos[date].hasOwnProperty(section)) {
+                                setTodos({ ...Todos, [date]: { ...Todos[date], [section]: [] } })
+                            }
+
+                            // Check if this is an edit (if an existing todo has this title)
+                            const existingTodoIndex = Todos[date][section].findIndex(todo => todo.title === inputs[n]);
+
+                            if (existingTodoIndex >= 0) {
+                                // This is an edit - update the existing todo
+                                const updatedTodos = [...Todos[date][section]];
+                                updatedTodos[existingTodoIndex] = { ...updatedTodos[existingTodoIndex], title: inputs[n] };
+                                setTodos({ ...Todos, [date]: { ...Todos[date], [section]: updatedTodos } })
+                                localStorage.setItem('Todos', JSON.stringify({ ...Todos, [date]: { ...Todos[date], [section]: updatedTodos } }))
+                            } else {
+                                // This is a new todo
                                 setTodos({ ...Todos, [date]: { ...Todos[date], [section]: [{ id: uuidv4(), title: inputs[n], isDone: false }, ...Todos[date][section]] } })
-                                setInputs({ ...inputs, [n]: "" })
                                 localStorage.setItem('Todos', JSON.stringify({ ...Todos, [date]: { ...Todos[date], [section]: [{ id: uuidv4(), title: inputs[n], isDone: false }, ...Todos[date][section]] } }))
-                            })}
-                            src="https://cdn.lordicon.com/navborva.json"
-                            colors="primary:#121331,secondary:#000000"
-                            trigger="hover"
-                            className="absolute right-0 w-15 h-15"
-                        >
-                        </lord-icon>
-                    </div>
-                </div>
+                            }
 
+                            setInputs({ ...inputs, [n]: "" })
+                        }
+                    }}
+                    className="block w-full ps-6 pe-2 py-1.5 sm:py-2 text-xs sm:text-base border-0 border-white/30 text-heading rounded-lg focus:ring-brand focus:border-brand shadow-lg sm:shadow-xl placeholder:text-sm sm:placeholder:text-xl hover:font-bold" placeholder="Add a todo" />
+                <lord-icon
+                    onClick={(() => {
+                        console.log(Todos)
+                        if (!Todos[date].hasOwnProperty(section)) {
+                            setTodos({ ...Todos, [date]: { ...Todos[date], [section]: [] } })
+                        }
+
+                        // Check if this is an edit (if an existing todo has this title)
+                        const existingTodoIndex = Todos[date][section].findIndex(todo => todo.title === inputs[n]);
+
+                        if (existingTodoIndex >= 0) {
+                            // This is an edit - update the existing todo
+                            const updatedTodos = [...Todos[date][section]];
+                            updatedTodos[existingTodoIndex] = { ...updatedTodos[existingTodoIndex], title: inputs[n] };
+                            setTodos({ ...Todos, [date]: { ...Todos[date], [section]: updatedTodos } })
+                            localStorage.setItem('Todos', JSON.stringify({ ...Todos, [date]: { ...Todos[date], [section]: updatedTodos } }))
+                        } else {
+                            // This is a new todo
+                            setTodos({ ...Todos, [date]: { ...Todos[date], [section]: [{ id: uuidv4(), title: inputs[n], isDone: false }, ...Todos[date][section]] } })
+                            localStorage.setItem('Todos', JSON.stringify({ ...Todos, [date]: { ...Todos[date], [section]: [{ id: uuidv4(), title: inputs[n], isDone: false }, ...Todos[date][section]] } }))
+                        }
+
+                        setInputs({ ...inputs, [n]: "" })
+                    })}
+                    src="https://cdn.lordicon.com/navborva.json"
+                    colors="primary:#121331,secondary:#000000"
+                    trigger="hover"
+                    className="absolute right-0 w-8 h-8 sm:w-10 sm:h-10 lg:w-15 lg:h-15"
+                >
+                </lord-icon>
             </div>
-
         </div>
+        </>
     )
 }
 
 export default TodoQuadrant
+
+
+
+
