@@ -21,13 +21,13 @@ There is a need for a simple system that:
 ##  Project Status
 
 ### what works : 
-####  going back and forward dates
+Checkbox and todo drag and drop
 
 ### what broken : 
-#### Adding any todo except for today gives error
+Way of storinging the todos is Localstorage(need better alt)
 
 ### what plan : 
-#### Fix section in all date 
+MongDb server and the nextAuth
 
 ---
 
@@ -41,7 +41,10 @@ The application keeps the interface minimal and distraction-free, making it suit
 
 ---
 
-## 📅 Project Status
+## 📅 Project Timeline
+
+### as on 26 Dec 2025
+![Preview 26 Dec](Documentations/Screenshots_and_gifs/6.gif)
 
 ### as on 25 Dec 2025
 ![Preview 25 Dec](Documentations/Screenshots_and_gifs/5.png)
