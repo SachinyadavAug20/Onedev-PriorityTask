@@ -44,6 +44,7 @@ The application keeps the interface minimal and distraction-free, making it suit
 ## 📅 Project Timeline
 
 ### as on 26 Dec 2025
+![Preview 26 Dec](Documentations/Screenshots_and_gifs/6.png)
 ![Preview 26 Dec](Documentations/Screenshots_and_gifs/6.gif)
 
 ### as on 25 Dec 2025
