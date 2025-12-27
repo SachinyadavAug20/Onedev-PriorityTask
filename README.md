@@ -18,20 +18,6 @@ There is a need for a simple system that:
 
 ---
 
-##  Project Status
-
-### what works : 
-Checkbox and todo drag and drop
-
-### what broken : 
-Way of storinging the todos is Localstorage(need better alt)
-
-### what plan : 
-MongDb server and the nextAuth
-
----
-
-
 ## 💡 Solution
 
 PriorityTask introduces a **priority-first workflow** where tasks are organized based on their importance.  
@@ -41,7 +27,27 @@ The application keeps the interface minimal and distraction-free, making it suit
 
 ---
 
+##  Project Status
+
+### what works : 
+Checkbox and todo drag and drop
+SignIn by google and github works
+
+### what broken : 
+User dashboard is pending
+AI feature is pending
+
+### what plan : 
+MongDb server and the nextAuth
+Added proper progress dashoard for user
+Added AI implemenation via Gemini API
+
+---
+
 ## 📅 Project Timeline
+
+### as on 27 Dec 2025
+![Preview 27 Dec](Documentations/Screenshots_and_gifs/7.gif)
 
 ### as on 26 Dec 2025
 ![Preview 26 Dec](Documentations/Screenshots_and_gifs/6.png)
