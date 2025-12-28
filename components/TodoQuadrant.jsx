@@ -204,7 +204,6 @@ const TodoQuadrant = ({ Todos, setTodos, inputs, setInputs, section, n, date }) 
                     className="block w-full ps-6 pe-2 py-1.5 sm:py-2 text-xs sm:text-base border-0 border-white/30 text-heading rounded-lg focus:ring-brand focus:border-brand shadow-lg sm:shadow-xl placeholder:text-sm sm:placeholder:text-xl hover:font-bold" placeholder="Add a todo" />
                 <lord-icon
                     onClick={(() => {
-                        console.log(Todos)
                         if (!Todos[date].hasOwnProperty(section)) {
                             setTodos({ ...Todos, [date]: { ...Todos[date], [section]: [] } })
                         }

@@ -39,6 +39,7 @@ AI feature is pending
 
 ### what plan : 
 MongDb server and the nextAuth
+Use react tostify
 Added proper progress dashoard for user
 Added AI implemenation via Gemini API
 

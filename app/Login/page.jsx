@@ -37,9 +37,8 @@ const page = () => {
         )
     }
     return (
-        <div className="flex w-full h-screen justify-center items-center">
-            <div className="absolute inset-0 -z-10 h-full w-full items-center px-5 py-24 [background:radial-gradient(125%_125%_at_50%_10%,#000_40%,#63e_100%)]"></div>
-            <div className="border rounded-md w-full max-w-sm mx-1 bg-white p-6 border-violet-600 dark:bg-gray-900" id="login-model">
+        <div className="flex w-full h-screen justify-center bg-linear-to-r from-violet-600 via-purple-600 to-pink-600 items-center">
+            <div className="border rounded-md w-full max-w-sm mx-1 bg-white p-6 border-violet-600 dark:bg-gray-900/60" id="login-model">
 
                 <p className="text-2xl font-bold dark:text-white">Login to Continue</p>
                 <p className="dark:text-gray-200">It will take less than 2 minutes</p>
