@@ -38,10 +38,10 @@ const Todo_matrix = ({ Todos, date1, setTodos }) => {
         taskCounter: "0/0"
     })
     const handleAsk = async () => {
+setResponse("")
         setQuestion("")
         setLoading(true)
         const res = await fetch('/api/gemini', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ prompt: question, Todos: Todos, currentDate: currentDate, userName: session?.user.name || "User" ,progressData:progressData}) })
-        setQuestion("")
         const data = await res.json();
         setLoading(false)
         // res.then((data)=>{console.log(data.json())})
