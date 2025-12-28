@@ -32,20 +32,24 @@ The application keeps the interface minimal and distraction-free, making it suit
 ### what works : 
 Checkbox and todo drag and drop
 SignIn by google and github works
+AI feature is connected
 
 ### what broken : 
 User dashboard is pending
-AI feature is pending
+Need use of AI
 
 ### what plan : 
 MongDb server and the nextAuth
-Use react tostify
+Use react tostify in AI output
 Added proper progress dashoard for user
 Added AI implemenation via Gemini API
 
 ---
 
 ## 📅 Project Timeline
+
+### as on 28 Dec 2025
+![Preview 28 Dec](Documentations/Screenshots_and_gifs/8.gif)
 
 ### as on 27 Dec 2025
 ![Preview 27 Dec](Documentations/Screenshots_and_gifs/7.gif)
