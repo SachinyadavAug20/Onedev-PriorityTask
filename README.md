@@ -33,20 +33,26 @@ The application keeps the interface minimal and distraction-free, making it suit
 Checkbox and todo drag and drop
 SignIn by google and github works
 AI feature is connected
+dropdown for each card for productive use case
 
 ### what broken : 
 User dashboard is pending
+Ai is giving undefined behavour
+dropdown is not well placed
 Need use of AI
 
 ### what plan : 
 MongDb server and the nextAuth
 Use react tostify in AI output
 Added proper progress dashoard for user
-Added AI implemenation via Gemini API
+Improve dropdown
 
 ---
 
 ## 📅 Project Timeline
+
+### as on 29 Dec 2025
+![Preview 29 Dec](Documentations/Screenshots_and_gifs/9.gif)
 
 ### as on 28 Dec 2025
 ![Preview 28 Dec](Documentations/Screenshots_and_gifs/8.gif)
@@ -56,7 +62,7 @@ Added AI implemenation via Gemini API
 
 ### as on 26 Dec 2025
 ![Preview 26 Dec](Documentations/Screenshots_and_gifs/6.png)
-![Preview 26 Dec](Documentations/Screenshots_and_gifs/6.gif)
+<!-- ![Preview 26 Dec](Documentations/Screenshots_and_gifs/6.gif) -->
 
 ### as on 25 Dec 2025
 ![Preview 25 Dec](Documentations/Screenshots_and_gifs/5.png)
