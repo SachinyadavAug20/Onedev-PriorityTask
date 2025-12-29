@@ -262,20 +262,8 @@ const Todo_matrix = ({ Todos, date1, setTodos }) => {
                     <div className="ml-4 pl-4 border-l border-white/30 flex flex-col items-center">
                         <div className="text-sm font-bold text-indigo-300 mb-1">TOTAL</div>
                         <div className="relative w-8 h-8">
-                            <svg className="w-8 h-8 transform -rotate-90 drop-shadow-sm" viewBox="0 0 36 36">
-                                <path d="m18,2.0845 a 15.9155,15.9155 0 0,1 0,31.831 a 15.9155,15.9155 0 0,1 0,-31.831"
-                                    fill="none" stroke="rgba(156, 163, 175, 0.4)" strokeWidth="3" strokeLinecap="round" />
-                                <path d="m18,2.0845 a 15.9155,15.9155 0 0,1 0,31.831 a 15.9155,15.9155 0 0,1 0,-31.831"
-                                    fill="none" stroke="url(#enhanced-gradient)" strokeWidth="3" strokeLinecap="round"
-                                    strokeDasharray={`${progressData.total}, 100`} />
-                                <defs>
-                                    <linearGradient id="enhanced-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                                        <stop offset="0%" stopColor="#6366f1" /><stop offset="50%" stopColor="#8b5cf6" /><stop offset="100%" stopColor="#ec4899" />
-                                    </linearGradient>
-                                </defs>
-                            </svg>
-                            <div className="absolute inset-0 flex items-center justify-center">
-                                <span className="text-xs font-bold text-indigo-300 drop-shadow-sm">
+                           <div className="absolute inset-0 flex items-center justify-center">
+                                <span className="text-lg font-bold text-indigo-300 drop-shadow-sm">
                                     {progressData.total}%
                                 </span>
                             </div>
