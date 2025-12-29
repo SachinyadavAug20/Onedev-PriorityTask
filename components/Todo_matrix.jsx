@@ -108,6 +108,7 @@ const Todo_matrix = ({ Todos, date1, setTodos }) => {
                     date.setDate(date.getDate() - 1);
                     const newDateString = date.toISOString().split('T')[0];
                     setCurrentDate(newDateString)
+
                     if (!Todos.hasOwnProperty(newDateString)) {
                         setTodos({
                             ...Todos,
@@ -253,7 +254,7 @@ const Todo_matrix = ({ Todos, date1, setTodos }) => {
                         </div>
                         <div className="w-full items-center flex justify-center text-center bg-black text-white border border-gray-300 mx-1 rounded-md ">
                             {animatedText}
-                            {loading &&  <div className="animate-pulse text-center">AI is generating response...</div>}
+                            {loading && <div className="animate-pulse text-center">AI is generating response...</div>}
                         </div>
 
                     </div>
@@ -262,7 +263,7 @@ const Todo_matrix = ({ Todos, date1, setTodos }) => {
                     <div className="ml-4 pl-4 border-l border-white/30 flex flex-col items-center">
                         <div className="text-sm font-bold text-indigo-300 mb-1">TOTAL</div>
                         <div className="relative w-8 h-8">
-                           <div className="absolute inset-0 flex items-center justify-center">
+                            <div className="absolute inset-0 flex items-center justify-center">
                                 <span className="text-lg font-bold text-indigo-300 drop-shadow-sm">
                                     {progressData.total}%
                                 </span>
