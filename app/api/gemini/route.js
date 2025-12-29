@@ -1,23 +1,18 @@
-import { GoogleGenAI } from "@google/genai";
+import { GoogleGenAI} from "@google/genai";
 
 // The client gets the API key from the environment variable `GEMINI_API_KEY`.
-const ai = new GoogleGenAI(process.env.GEMINI_API_KEY);
+const ai = new GoogleGenAI({ apiVersion: 'v1', apiKey: process.env.GEMINI_API_KEY });
 
-async function main() {
-    const response = await ai.models.generateContent({
-        model: "gemini-2.5-flash",
-        contents: "Explain how AI works in a few words",
-    });
-    console.log(response.text);
-}
-export async function Post(req) {
+export async function POST(req) {
     try {
         const { prompt, Todos, currentDate, userName, progressData } = await req.json();  // Parse body from fetch
         if (!prompt) return Response.json({ error: "Prompt required" }, { status: 400 });
 
         const response = await ai.models.generateContent({
             model: "gemini-2.5-flash",
-            contents: `
+            contents: [{
+                parts: [{
+                    text: `
 You are a calm, wise, and empathetic productivity mentor helping ${userName} inside a priority-based todo app built on the Eisenhower Matrix.
 
 Context:
@@ -62,13 +57,13 @@ Do not include any undefined characters or extra text at the end
 
 Goal:
 Help the user feel clear, motivated, and confident about what to do next while reinforcing efficient, stress-free prioritization.
-`,
+` }]
+            }],
         });
 
-        return Response.json({ response: response.text });
+        return Response.json({ response: response.text() });
     } catch (error) {
+        console.log("Gemini API Error:", error);
         return Response.json({ error: "Failed to generate response" }, { status: 500 });
     }
 }
-
-export { main as GET, Post as POST }

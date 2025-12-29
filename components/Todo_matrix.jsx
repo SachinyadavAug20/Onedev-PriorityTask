@@ -38,14 +38,21 @@ const Todo_matrix = ({ Todos, date1, setTodos }) => {
         taskCounter: "0/0"
     })
     const handleAsk = async () => {
-setResponse("")
         setQuestion("")
         setLoading(true)
-        const res = await fetch('/api/gemini', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ prompt: question, Todos: Todos, currentDate: currentDate, userName: session?.user.name || "User" ,progressData:progressData}) })
-        const data = await res.json();
-        setLoading(false)
-        // res.then((data)=>{console.log(data.json())})
-        setResponse(data.response || "Error occurred")
+        try {
+            const res = await fetch('/api/gemini', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ prompt: question, Todos: Todos, currentDate: currentDate, userName: session?.user.name || "User", progressData: progressData }) })
+            if (!res.ok) {
+                throw new Error(`HTTP ${res.status}`);
+            }
+            const data = await res.json();
+            setResponse(data.response || "Error occurred")
+            console.log(data)
+        } catch (error) {
+            setResponse("API Error: " + error.message)
+        } finally {
+            setLoading(false)
+        }
     }
 
     // Calculate progress after hydration to avoid SSR mismatch
