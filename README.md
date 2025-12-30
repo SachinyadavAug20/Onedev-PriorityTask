@@ -38,18 +38,20 @@ dropdown for each card for productive use case
 ### what broken : 
 User dashboard is pending
 Ai is giving undefined behavour
-dropdown is not well placed
-Need use of AI
+Working manageable Data base structure
 
 ### what plan : 
 MongDb server and the nextAuth
 Use react tostify in AI output
 Added proper progress dashoard for user
-Improve dropdown
+Create and save user data on the db and keep localstorage
 
 ---
 
 ## 📅 Project Timeline
+
+### as on 30 Dec 2025
+![Preview 30 Dec](Documentations/Screenshots_and_gifs/10.png)
 
 ### as on 29 Dec 2025
 ![Preview 29 Dec](Documentations/Screenshots_and_gifs/9.gif)
