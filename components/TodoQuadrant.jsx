@@ -23,7 +23,7 @@ const TodoCard = dynamic(() => import('./TodoCard'), {
     )
 });
 
-const TodoQuadrant = ({ Todos, setTodos, inputs, setInputs, section, n, date }) => {
+const TodoQuadrant = ({ Todos, setTodos, inputs, setInputs, section, n, date,setQuestion }) => {
     const [mounted, setMounted] = useState(false);
 
     useEffect(() => {
@@ -165,7 +165,7 @@ const TodoQuadrant = ({ Todos, setTodos, inputs, setInputs, section, n, date }) 
                             </div>
                         ) : (
                             Todos[date][section].map((todo) => (
-                                <TodoCard key={todo.id} todo={todo} date={date} section={section} Todos={Todos} setTodos={setTodos} inputs={inputs} setInputs={setInputs} n={n} />
+                                <TodoCard key={todo.id} setQuestion={setQuestion} todo={todo} date={date} section={section} Todos={Todos} setTodos={setTodos} inputs={inputs} setInputs={setInputs} n={n} />
                             ))
                         )}
                     </SortableContext>

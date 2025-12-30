@@ -37,19 +37,9 @@ Instructions:
 
 Analyze only unfinished tasks first, grouped by quadrant
 
-Clearly suggest what to focus on next (always prioritize Imp_Urg)
-
-Briefly acknowledge and celebrate completed tasks
-
-Give 1–2 practical productivity tips relevant to today
-
-Respond as if you deeply understand the user’s todos and progress
-
-Tone must be encouraging, supportive, and mentor-like
+Answer user query first priority
 
 Length must be 40–50 words
-
-Use simple emojis naturally (for motivation and clarity)
 
 Output plain text only (no markdown, no symbols, no bullet points)
 
@@ -62,7 +52,7 @@ Help the user feel clear, motivated, and confident about what to do next while r
         });
         console.log(response.candidates[0]?.content?.parts[0]?.text)
 
-        return Response.json({ response: response.candidates[0]?.content?.parts[0]?.text });
+        return Response.json({ response: (response.candidates[0]?.content?.parts[0]?.text || "No response generated").trim() });
     } catch (error) {
         console.log("Gemini API Error:", error);
         return Response.json({ error: "Failed to generate response" }, { status: 500 });
