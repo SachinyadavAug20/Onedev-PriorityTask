@@ -2,6 +2,7 @@
 import { useSortable } from "@dnd-kit/sortable"
 import { CSS } from "@dnd-kit/utilities";
 import { useState } from "react";
+import { v4 as uuidv4 } from 'uuid';
 const TodoCard = ({ todo, date, Todos, setTodos, inputs, setInputs, n, section, Ndate, Pdate }) => {
     const {
         attributes,
@@ -18,6 +19,7 @@ const TodoCard = ({ todo, date, Todos, setTodos, inputs, setInputs, n, section, 
         zIndex: isDragging ? 1000 : 'auto',
     }
     const [dropdown, setDropdown] = useState(false)
+    const [no_of_days, setNo_of_days] = useState(0)
 
     const handleWillDoTommorow = () => {
         const tomorrow = new Date(date);
@@ -71,10 +73,14 @@ const TodoCard = ({ todo, date, Todos, setTodos, inputs, setInputs, n, section, 
                 };
             }
 
+            // Check if a todo with the same title already exists in the section
+            const existing = updatedTodos[futureString][section]?.find(t => t.title === todo.title);
+            if (existing) continue; // Skip if already exists
+
             // Add to future day's section
             updatedTodos[futureString] = {
                 ...updatedTodos[futureString],
-                [section]: [...(updatedTodos[futureString][section] || []), { ...todo, id: `${todo.id}-${i}`, isDone: false }] // Unique ID for repeats
+                [section]: [...(updatedTodos[futureString][section] || []), { ...todo, id: uuidv4(), isDone: false }] // Unique ID for repeats
             };
         }
 
@@ -207,9 +213,33 @@ const TodoCard = ({ todo, date, Todos, setTodos, inputs, setInputs, n, section, 
                             <li className="hover:bg-neutral-tertiary-medium hover:text-heading hover:shadow-lg">
                                 <button className="inline-flex cursor-pointer items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded" onClick={() => { handleWillDoTommorow() }}>Will do tomorrow</button>
                             </li>
-                            <li className="hover:bg-neutral-tertiary-medium hover:text-heading hover:shadow-lg">
-                                <button className="inline-flex cursor-pointer items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded" onClick={() => { handleRepeatDays(5) }}>Repeat for 5 days</button>
-                            </li>
+                            <div className="flex hover:bg-neutral-tertiary-medium hover:text-heading hover:shadow-lg justify-center items-center">
+
+                                <li className="">
+                                    <button className="inline-flex cursor-pointer items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded" >Days <input type="number" className="w-10 px-1" value={no_of_days} onChange={(e) => { setNo_of_days(Math.max(0, parseInt(e.target.value) || 0)) }} /> </button>
+                                </li>
+                                <div className="border rounded-lg p-0.5 cursor-pointer"
+                                    onClick={() => { handleRepeatDays(parseInt(no_of_days) || 0); setDropdown(false) }}
+                                >
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="22"
+                                        height="22"
+                                        viewBox="0 0 22 22"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        strokeWidth="2"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                    >
+                                        <path d="M17 1l4 4-4 4" />
+                                        <path d="M21 5H7a4 4 0 0 0-4 4v1" />
+
+                                        <path d="M7 23l-4-4 4-4" />
+                                        <path d="M3 19h14a4 4 0 0 0 4-4v-1" />
+                                    </svg>
+                                </div>
+                            </div>
                             <li className="hover:bg-neutral-tertiary-medium hover:text-heading hover:shadow-lg">
                                 <button className="inline-flex cursor-pointer items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded" onClick={() => { handleRepeatDays(10) }}>Repeat for 10 days</button>
                             </li>

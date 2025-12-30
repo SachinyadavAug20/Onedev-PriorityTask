@@ -1,4 +1,4 @@
-import { GoogleGenAI} from "@google/genai";
+import { GoogleGenAI } from "@google/genai";
 
 // The client gets the API key from the environment variable `GEMINI_API_KEY`.
 const ai = new GoogleGenAI({ apiVersion: 'v1', apiKey: process.env.GEMINI_API_KEY });
@@ -60,8 +60,9 @@ Help the user feel clear, motivated, and confident about what to do next while r
 ` }]
             }],
         });
+        console.log(response.candidates[0]?.content?.parts[0]?.text)
 
-        return Response.json({ response: response.text() });
+        return Response.json({ response: response.candidates[0]?.content?.parts[0]?.text });
     } catch (error) {
         console.log("Gemini API Error:", error);
         return Response.json({ error: "Failed to generate response" }, { status: 500 });
