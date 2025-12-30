@@ -38,6 +38,7 @@ const Todo_matrix = ({ Todos, date1, setTodos }) => {
         taskCounter: "0/0"
     })
     const handleAsk = async () => {
+        setResponse("")
         setQuestion("")
         setLoading(true)
         try {
@@ -228,9 +229,9 @@ const Todo_matrix = ({ Todos, date1, setTodos }) => {
 
                     <div className="w-[62%] rounded-xl py-5 flex">
 
-                        <div className="flex items-center bg-black text-white border border-gray-300 w-1/3 mx-1 rounded-md">
+                        <div className="flex items-center bg-white/10 backdrop-blur-md text-gray-800 border border-white/20 w-1/3 mx-1 rounded-lg shadow-lg hover:bg-white/15 transition-all duration-200">
                             <input
-                                className="grow p-2 border-none focus:ring-0 focus:outline-none"
+                                className="grow p-2 border-none bg-transparent focus:ring-0 focus:outline-none placeholder-gray-600 text-black"
                                 placeholder="Enter your prompt..."
                                 value={question}
                                 onChange={(e) => { setQuestion(e.target.value) }}
@@ -242,19 +243,19 @@ const Todo_matrix = ({ Todos, date1, setTodos }) => {
                                 }}
                             />
 
-                            <button onClick={() => { handleAsk() }} className="p-2 hover:bg-gray-600 focus:outline-none" type="submit">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" className="h-6 w-6 text-gray-600" viewBox="0 -0.5 25 25" >
+                            <button onClick={() => { handleAsk() }} className="p-2 hover:bg-white/20 focus:outline-none rounded-r-lg transition-colors duration-150" type="submit">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" className="h-6 w-6 text-blue-500 hover:text-blue-600" viewBox="0 -0.5 25 25" >
                                     <g strokeWidth="0" id="SVGRepo_bgCarrier"></g>
                                     <g strokeLinejoin="round" strokeLinecap="round" id="SVGRepo_tracerCarrier" ></g>
                                     <g id="SVGRepo_iconCarrier">
-                                        <path strokeLinejoin="round" strokeLinecap="round" strokeWidth="1.5" stroke="#ffffff" d="M18.455 9.8834L7.063 4.1434C6.76535 3.96928 6.40109 3.95274 6.08888 4.09916C5.77667 4.24558 5.55647 4.53621 5.5 4.8764C5.5039 4.98942 5.53114 5.10041 5.58 5.2024L7.749 10.4424C7.85786 10.7903 7.91711 11.1519 7.925 11.5164C7.91714 11.8809 7.85789 12.2425 7.749 12.5904L5.58 17.8304C5.53114 17.9324 5.5039 18.0434 5.5 18.1564C5.55687 18.4961 5.77703 18.7862 6.0889 18.9323C6.40078 19.0785 6.76456 19.062 7.062 18.8884L18.455 13.1484C19.0903 12.8533 19.4967 12.2164 19.4967 11.5159C19.4967 10.8154 19.0903 10.1785 18.455 9.8834V9.8834Z" clipRule="evenodd" fillRule="evenodd" ></path>
+                                        <path strokeLinejoin="round" strokeLinecap="round" strokeWidth="1.5" stroke="currentColor" d="M18.455 9.8834L7.063 4.1434C6.76535 3.96928 6.40109 3.95274 6.08888 4.09916C5.77667 4.24558 5.55647 4.53621 5.5 4.8764C5.5039 4.98942 5.53114 5.10041 5.58 5.2024L7.749 10.4424C7.85786 10.7903 7.91711 11.1519 7.925 11.5164C7.91714 11.8809 7.85789 12.2425 7.749 12.5904L5.58 17.8304C5.53114 17.9324 5.5039 18.0434 5.5 18.1564C5.55687 18.4961 5.77703 18.7862 6.0889 18.9323C6.40078 19.0785 6.76456 19.062 7.062 18.8884L18.455 13.1484C19.0903 12.8533 19.4967 12.2164 19.4967 11.5159C19.4967 10.8154 19.0903 10.1785 18.455 9.8834V9.8834Z" clipRule="evenodd" fillRule="evenodd" ></path>
                                     </g>
                                 </svg>
                             </button>
                         </div>
-                        <div className="w-full items-center flex justify-center text-center bg-black text-white border border-gray-300 mx-1 rounded-md ">
+                        <div className="w-full items-center flex justify-center text-center bg-white/10 backdrop-blur-md text-black border border-white/20 mx-1 rounded-lg shadow-lg hover:bg-white/15 transition-all duration-200">
                             {animatedText}
-                            {loading && <div className="animate-pulse text-center">AI is generating response...</div>}
+                            {loading && <div className="animate-pulse text-center text-blue-700">AI is generating response...</div>}
                         </div>
 
                     </div>

@@ -6,7 +6,7 @@ const Navbar = ({ date, mode, setMode }) => {
     const { data: session } = useSession()
     return (
         <div className="">
-            <div className={mode == "dark" ? `flex border-t-0 border-2 rounded-t-none border-gray-300 rounded-lg justify-between px-2 sm:px-3 lg:px-5 bg-black text-white py-1 sm:py-2` : `flex justify-between border-t-0 px-2 sm:px-3 lg:px-5 bg-sky-50 border-2 rounded-t-none border-gray-700 rounded-lg text-black py-1 sm:py-2`}>
+            <div className={mode == "dark" ? `flex border-t-0 border-2 rounded-t-none border-white/20 rounded-lg justify-between px-2 sm:px-3 lg:px-5 bg-black/80 backdrop-blur-md text-white py-1 sm:py-2 shadow-lg` : `flex justify-between border-t-0 px-2 sm:px-3 lg:px-5 bg-sky-50/80 backdrop-blur-md border-2 rounded-t-none border-gray-700/50 rounded-lg text-black py-1 sm:py-2 shadow-lg`}>
                 <div className="flex justify-center items-center gap-3">
 
                     <Link href={"./"}>

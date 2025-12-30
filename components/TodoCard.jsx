@@ -159,8 +159,7 @@ const TodoCard = ({ todo, date, Todos, setTodos, inputs, setInputs, n, section, 
                         setTodos(newTodos);
                         localStorage.setItem('Todos', JSON.stringify(newTodos));
                     }}
-                    className="flex justify-center items-center gap-2 w-15 h-10 cursor-pointer rounded-md shadow-2xl text-white font-semibold bg-gradient-to-r from-[#fb7185] via-[#e11d48] to-[#be123c] hover:shadow-xl hover:shadow-red-500 hover:scale-105 duration-300 hover:from-[#be123c] hover:to-[#fb7185]"
-                >
+                    className="flex justify-center items-center gap-2 w-15 h-10 cursor-pointer rounded-md shadow-2xl text-white font-semibold bg-linear-to-r from-[#fb7185] via-[#e11d48] to-[#be123c] hover:shadow-xl hover:shadow-red-500 hover:scale-105 duration-300 hover:from-[#be123c] hover:to-[#fb7185]" >
                     <svg viewBox="0 0 15 15" className="w-5 fill-white">
                         <svg
                             className="w-6 h-6"
@@ -169,7 +168,8 @@ const TodoCard = ({ todo, date, Todos, setTodos, inputs, setInputs, n, section, 
                         </svg>
                     </svg>
                 </button>
-                <div>
+
+                <div className="flex justify-center items-center">
 
                     <button onClick={() => { setDropdown(!dropdown) }} className="text-heading bg-neutral-primary box-border border border-transparent place-self-end cursor-crosshair hover:bg-neutral-secondary-medium focus:ring-2 focus:bg-slate-900 rounded-lg focus:ring-neutral-tertiary font-medium leading-5 rounded-base text-sm p-2 focus:outline-none" onKeyDown={(e) => {
                         if (e.key == "Escape") {
@@ -208,44 +208,61 @@ const TodoCard = ({ todo, date, Todos, setTodos, inputs, setInputs, n, section, 
                         }
                     </button>
 
-                    <div className={`z-1111 ${dropdown ? "" : " hidden "} bg-neutral-primary-medium border border-default-medium rounded-base shadow-lg w-44 relative right-0`}>
-                        <ul className="p-2 text-sm text-body font-medium" >
-                            <li className="hover:bg-neutral-tertiary-medium hover:text-heading hover:shadow-lg">
-                                <button className="inline-flex cursor-pointer items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded" onClick={() => { handleWillDoTommorow() }}>Will do tomorrow</button>
-                            </li>
-                            <div className="flex hover:bg-neutral-tertiary-medium hover:text-heading hover:shadow-lg justify-center items-center">
-
-                                <li className="">
-                                    <button className="inline-flex cursor-pointer items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded" >Days <input type="number" className="w-10 px-1" value={no_of_days} onChange={(e) => { setNo_of_days(Math.max(0, parseInt(e.target.value) || 0)) }} /> </button>
-                                </li>
-                                <div className="border rounded-lg p-0.5 cursor-pointer"
-                                    onClick={() => { handleRepeatDays(parseInt(no_of_days) || 0); setDropdown(false) }}
-                                >
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        width="22"
-                                        height="22"
-                                        viewBox="0 0 22 22"
-                                        fill="none"
-                                        stroke="currentColor"
-                                        strokeWidth="2"
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                    >
-                                        <path d="M17 1l4 4-4 4" />
-                                        <path d="M21 5H7a4 4 0 0 0-4 4v1" />
-
-                                        <path d="M7 23l-4-4 4-4" />
-                                        <path d="M3 19h14a4 4 0 0 0 4-4v-1" />
+                    <div className={`z-1111 ${dropdown ? "opacity-100 scale-100" : "opacity-0 scale-95 hidden"} bg-white/10 backdrop-blur-xl border border-white/20 rounded-xl shadow-2xl w-70 relative right-0 transition-all duration-200 ease-out transform`}>
+                        <ul className="py-2 text-sm text-gray-800 font-medium">
+                            <li className="px-4 py-2 hover:bg-white/20 hover:text-blue-600 transition-colors duration-150 cursor-pointer rounded-lg mx-2">
+                                <button className="flex items-center w-full text-left" onClick={() => { handleWillDoTommorow(); setDropdown(false); }}>
+                                    <svg className="w-4 h-4 mr-3 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                                     </svg>
+                                    Will do tomorrow
+                                </button>
+                            </li>
+                            <li className="px-4 py-2 hover:bg-white/20 transition-colors duration-150 cursor-pointer rounded-lg mx-2">
+                                <div className="flex items-center justify-between w-full">
+                                    <span className="flex items-center text-gray-700">
+                                        <svg className="w-4 h-4 mr-3 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                                        </svg>
+                                        Repeat for
+                                        <input
+                                            type="number"
+                                            className="w-12 mx-2 px-2 py-1 text-xs border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                            value={no_of_days}
+                                            onChange={(e) => { setNo_of_days(Math.max(0, parseInt(e.target.value) || 0)) }}
+                                            placeholder="0"
+                                        />
+                                        days
+                                    </span>
+                                    <button
+                                        className="ml-2 p-1 bg-green-500 hover:bg-green-600 text-white rounded-full transition-colors duration-150"
+                                        onClick={() => { handleRepeatDays(parseInt(no_of_days) || 0); setDropdown(false); }}
+                                    >
+                                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                                        </svg>
+                                    </button>
                                 </div>
-                            </div>
-                            <li className="hover:bg-neutral-tertiary-medium hover:text-heading hover:shadow-lg">
-                                <button className="inline-flex cursor-pointer items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded" onClick={() => { handleRepeatDays(10) }}>Repeat for 10 days</button>
+                            </li>
+                            <li className="px-4 py-2 hover:bg-white/20 hover:text-purple-600 transition-colors duration-150 cursor-pointer rounded-lg mx-2">
+                                <button className="flex items-center w-full text-left" onClick={() => { handleRepeatDays(10); setDropdown(false); }}>
+                                    <svg className="w-4 h-4 mr-3 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                                    </svg>
+                                    Repeat for 10 days
+                                </button>
                             </li>
                         </ul>
-                        <div className="p-2 text-sm text-body font-medium border-t border-default-medium">
-                            <button className="inline-flex cursor-pointer items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded" onClick={() => { handleRepeatDays(15) }}>Repeat for 15 days</button>
+                        <div className="border-t border-white/20 px-4 py-2">
+                            <button
+                                className="flex items-center w-full text-left text-sm font-medium text-gray-800 hover:text-red-600 hover:bg-white/20 px-2 py-1 rounded-lg transition-colors duration-150"
+                                onClick={() => { handleRepeatDays(15); setDropdown(false); }}
+                            >
+                                <svg className="w-4 h-4 mr-3 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                                Repeat for 15 days
+                            </button>
                         </div>
                     </div>
                 </div>
