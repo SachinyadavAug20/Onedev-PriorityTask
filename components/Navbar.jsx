@@ -7,7 +7,7 @@ const Navbar = ({ date}) => {
 
     return (
         <div className="">
-            <div className={`flex justify-between border-t-0 px-2 sm:px-3 lg:px-5 bg-linear-to-r to-violet-700 via-purple-700 from-pink-700 backdrop-blur-md border-2 rounded-t-none border-gray-700/50 rounded-lg text-black py-1 sm:py-2 shadow-lg`}>
+            <div className={`flex justify-between border-t-0 px-2 sm:px-3 lg:px-5 bg-white/30 backdrop-blur-md border-2 rounded-t-none border-gray-700/50 rounded-lg text-black py-1 sm:py-2 shadow-lg`}>
                 <div className="flex justify-center items-center gap-3">
 
                     <Link href={"/"}>

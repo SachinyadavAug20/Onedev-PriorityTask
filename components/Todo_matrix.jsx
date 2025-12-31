@@ -28,7 +28,6 @@ const Todo_matrix = ({ Todos, date1, setTodos }) => {
         return () => clearInterval(interval);  // Cleanup
     }, [response]);
 
-    // Progress state to avoid hydration mismatch
     const [progressData, setProgressData] = useState({
         Imp_Urg: 0,
         nImp_Urg: 0,
@@ -56,7 +55,6 @@ const Todo_matrix = ({ Todos, date1, setTodos }) => {
         }
     }
 
-    // Calculate progress after hydration to avoid SSR mismatch
     useEffect(() => {
         const calculateProgress = () => {
             const currentTodos = Todos[currentDate]
