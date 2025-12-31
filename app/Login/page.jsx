@@ -1,13 +1,44 @@
 "use client"
 import { useSession, signIn, signOut } from "next-auth/react"
 import Link from "next/link"
+import { toast } from "react-toastify"
+import { Bounce } from "react-toastify"
+import { ToastContainer } from "react-toastify"
 
 const page = () => {
     const { data: session } = useSession()
     if (session) {
+        setTimeout(() => {
+            toast(`Welcome, ${session.user.name}`, {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: false,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+                transition: Bounce,
+            });
+        }, 300);
         console.log(session)
+        console.log(session.user.image)
+
         return (
             <div>
+                <ToastContainer
+                    position="top-right"
+                    autoClose={5000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick={false}
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                    theme="light"
+                    transition={Bounce}
+                />
                 <div className="text-white min-h-screen flex bg-linear-to-r from-violet-600 via-purple-600 to-pink-600 items-center justify-center">
                     <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-8 shadow-2xl max-w-md w-full">
                         <div className="text-center text-black">
@@ -41,7 +72,7 @@ const page = () => {
             <div className="border rounded-md w-full max-w-sm mx-1 bg-white p-6 border-violet-600 dark:bg-gray-900/60" id="login-model">
 
                 <p className="text-2xl font-bold dark:text-white">Login to Continue</p>
-                <p className="dark:text-gray-200">It will take less than 2 minutes</p>
+                <p className="dark:text-gray-200">It will take less than 2 minutes 1 second :)</p>
 
                 <div className="mt-4">
                     <button onClick={() => { signIn("google") }} className="w-full text-center py-2 my-3 border flex items-center justify-center border-slate-200 rounded-lg text-slate-700 hover:border-slate-400 hover:text-slate-900 hover:shadow transition duration-150">

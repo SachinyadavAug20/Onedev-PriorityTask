@@ -2,6 +2,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import "./my.css"
 import SessionProviderWrapper from "@/components/SessionProvider";
+import { TodoProvider } from "@/lib/TodoContext";
 import Navbar from "@/components/Navbar";
 
 const geistSans = Geist({
@@ -23,15 +24,24 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, '0');
+    const day = String(today.getDate()).padStart(2, '0');
+    const formattedDate = `${year}-${month}-${day}`;
+ 
     return (
         <html lang="en">
             <SessionProviderWrapper>
-            <body
-                className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-                <div className="FONT_ON_PAGE">
-                    {children}
-                </div>
-            </body>
+                <TodoProvider>
+                    <body
+                        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-linear-to-r from-violet-700 via-purple-700 to-pink-700`}>
+                        <div className="FONT_ON_PAGE">
+                            <Navbar date={formattedDate}/>
+                            {children}
+                        </div>
+                    </body>
+                </TodoProvider>
             </SessionProviderWrapper>
         </html>
     );
