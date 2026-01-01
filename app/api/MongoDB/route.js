@@ -19,7 +19,7 @@ export async function POST(request) {
         await mongoose.connect(connectionStr)
         let user_new = new User(data)
         const result = await user_new.save();
-        return NextResponse.json({ result: result })
+        return NextResponse.json({ result: true, data: result })
 
     } catch (error) {
         console.log(error)

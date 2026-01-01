@@ -14,6 +14,7 @@ const Todo_matrix = ({ Todos, date1, setTodos }) => {
     const [loading, setLoading] = useState(false)
     const { data: session } = useSession()
 
+
     useEffect(() => {
         setAnimatedText("");  // Reset
         let index = 0;
@@ -27,6 +28,7 @@ const Todo_matrix = ({ Todos, date1, setTodos }) => {
         }, 25);  // 
         return () => clearInterval(interval);  // Cleanup
     }, [response]);
+
 
     const [progressData, setProgressData] = useState({
         Imp_Urg: 0,
