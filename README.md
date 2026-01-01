@@ -34,21 +34,23 @@ Checkbox and todo drag and drop
 SignIn by google and github works
 AI feature is connected
 dropdown for each card for productive use case
+MongoDB and localstorage both works
 
 ### what broken : 
 User dashboard is pending
 Ai is giving undefined behavour
-Working manageable Data base structure
+Unresponsive on mobile
 
 ### what plan : 
-MongDb server and the nextAuth
-Use react tostify in AI output
-Added proper progress dashoard for user
-Create and save user data on the db and keep localstorage
+Added more productive features
+fix AI
 
 ---
 
 ## 📅 Project Timeline
+
+### as on 1 Jan 2026
+![Preview 1 Jan](Documentations/Screenshots_and_gifs/11.gif)
 
 ### as on 30 Dec 2025
 ![Preview 30 Dec](Documentations/Screenshots_and_gifs/10.png)
