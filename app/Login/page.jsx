@@ -40,12 +40,12 @@ const page = () => {
                     transition={Bounce}
                 />
                 <div className="text-white min-h-screen flex bg-linear-to-r from-violet-600 via-purple-600 to-pink-600 items-center justify-center">
-                    <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-8 shadow-2xl max-w-md w-full">
+                    <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-6 sm:p-8 shadow-2xl max-w-md w-full">
                         <div className="text-center text-black">
-                            <h1 className="text-3xl font-bold mb-4">Welcome back!</h1>
-                            <p className="text-lg mb-2">You are signed in as:</p>
+                            <h1 className="text-2xl sm:text-3xl font-bold mb-4">Welcome back!</h1>
+                            <p className="text-base sm:text-lg mb-2">You are signed in as:</p>
                             <div className="bg-white/20 rounded-lg p-4 mb-6">
-                                <p className="font-semibold text-xl">{session.user.name || session.user.email}</p>
+                                <p className="font-semibold text-lg sm:text-xl">{session.user.name || session.user.email}</p>
                                 <p className="text-sm opacity-80">{session.user.email}</p>
                             </div>
                             <Link href="/">
@@ -68,11 +68,11 @@ const page = () => {
         )
     }
     return (
-        <div className="flex w-full h-screen justify-center bg-linear-to-r from-violet-600 via-purple-600 to-pink-600 items-center">
-            <div className="border rounded-md w-full max-w-sm mx-1 bg-white p-6 border-violet-600 dark:bg-gray-900/60" id="login-model">
+        <div className="flex w-full min-h-screen justify-center bg-linear-to-r from-violet-600 via-purple-600 to-pink-600 items-center px-4">
+            <div className="border rounded-md w-full max-w-sm mx-1 bg-white p-4 sm:p-6 border-violet-600 dark:bg-gray-900/60" id="login-model">
 
-                <p className="text-2xl font-bold dark:text-white">Login to Continue</p>
-                <p className="dark:text-gray-200">It will take less than 2 minutes 1 second :)</p>
+                <p className="text-xl sm:text-2xl font-bold dark:text-white">Login to Continue</p>
+                <p className="text-sm sm:text-base dark:text-gray-200">It will take less than 2 minutes 1 second :)</p>
 
                 <div className="mt-4">
                     <button onClick={() => { signIn("google") }} className="w-full text-center py-2 my-3 border flex items-center justify-center border-slate-200 rounded-lg text-slate-700 hover:border-slate-400 hover:text-slate-900 hover:shadow transition duration-150">

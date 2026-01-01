@@ -116,7 +116,7 @@ const TodoCard = ({ todo, date, Todos, setTodos, inputs, setInputs, n, section, 
                 }} className="w-5 h-5 accent-green-600 bg-white/10 border border-white/30 rounded-full focus:ring-2 focus:ring-white/50 hover:bg-white/20 transition-all duration-200" />
 
 
-                <span className={`text-heading text-base hover:font-bold ${todo.isDone ? 'line-through text-gray-400' : ''}`}>{todo.title}</span>
+                <span className={`text-heading text-[12px] sm:text-[16px] hover:font-bold ${todo.isDone ? 'line-through text-gray-400' : ''}`}>{todo.title}</span>
             </div>
             <div className="flex space-x-0.5 sm:space-x-1 lg:space-x-2 justify-center items-center">
                 <button
@@ -145,8 +145,8 @@ const TodoCard = ({ todo, date, Todos, setTodos, inputs, setInputs, n, section, 
                             d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325"
                         ></path>
                     </svg>
-                    Edit
-                </button>
+                    {/* Edit */}
+               </button>
                 <button
                     onClick={() => {
                         const newTodos = {
@@ -208,11 +208,11 @@ const TodoCard = ({ todo, date, Todos, setTodos, inputs, setInputs, n, section, 
                         }
                     </button>
 
-                    <div className={`z-1111 ${dropdown ? "opacity-100 scale-100" : "opacity-0 scale-95 hidden"} bg-white/10 backdrop-blur-xl border border-white/20 rounded-xl shadow-2xl w-70 relative right-0 transition-all duration-200 ease-out transform`}>
+                    <div className={`z-1111 ${dropdown ? "opacity-100 scale-100" : "opacity-0 scale-95 hidden"} bg-white/10 backdrop-blur-xl border border-white/20 rounded-xl text-[12px] sm:text-[16px] shadow-2xl w-70 relative right-0 transition-all duration-200 ease-out transform`}>
                         <ul className="py-2 text-sm text-gray-800 font-medium">
                             <li className="px-4 py-2 hover:bg-white/20 hover:text-blue-600 transition-colors duration-150 cursor-pointer rounded-lg mx-2">
                                 <button className="flex items-center w-full text-left" onClick={() => { handleWillDoTommorow(); setDropdown(false); }}>
-                                    <svg className="w-4 h-4 mr-3 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <svg className="w-4 h-4 mr-3 focus:invert-75 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                                     </svg>
                                     Will do tomorrow

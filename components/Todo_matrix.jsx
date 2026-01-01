@@ -160,79 +160,91 @@ const Todo_matrix = ({ Todos, date1, setTodos }) => {
             </div>
 
 
-            <div className="flex flex-col sm:grid sm:grid-cols-2 gap-0 sm:gap-0 px-2 sm:px-3 lg:px-5 pb-4 sm:pb-6 lg:pb-10 pt-1 sm:pt-2 sm:grid-rows-2 h-[85vh] sm:h-auto overflow-y-auto sm:overflow-visible">
-                <div className="bg-yellow-500 border-0 rounded-xl rounded-br-none h-[40vh] sm:h-[25vh] lg:h-[35vh] mb-2 sm:mb-0">
+            <div className="flex flex-col sm:grid sm:grid-cols-2 gap-0 sm:gap-0 px-2 sm:px-3 lg:px-5 pb-[34vh] sm:pb-6 lg:pb-10 pt-1 sm:pt-2 sm:grid-rows-2 min-h-[80vh] sm:h-auto overflow-y-auto sm:overflow-visible">
+                <div className="bg-yellow-500 border-0 rounded-xl rounded-br-none h-[30vh] sm:h-[25vh] lg:h-[35vh] mb-2 sm:mb-0">
                     <TodoQuadrant date={currentDate} inputs={inputs} setInputs={setInputs} Todos={Todos} setTodos={setTodos} setQuestion={setQuestion} section='Imp_nUrg' n="i1" />
                 </div>
 
-                <div className="bg-green-500 border-0 rounded-xl flex flex-col rounded-bl-none justify-between h-[40vh] sm:h-[25vh] lg:h-[35vh] mb-2 sm:mb-0">
+                <div className="bg-green-500 border-0 rounded-xl flex flex-col rounded-bl-none justify-between h-[30vh] sm:h-[25vh] lg:h-[35vh] mb-2 sm:mb-0">
                     <TodoQuadrant date={currentDate} inputs={inputs} setInputs={setInputs} Todos={Todos} setTodos={setTodos} setQuestion={setQuestion} section='Imp_Urg' n="i2" />
                 </div>
-                <div className="bg-gray-500 border-0 rounded-xl flex flex-col rounded-tr-none justify-between h-[40vh] sm:h-[25vh] lg:h-[35vh] mb-2 sm:mb-0">
+                <div className="bg-gray-500 border-0 rounded-xl flex flex-col rounded-tr-none justify-between h-[30vh] sm:h-[25vh] lg:h-[35vh] mb-2 sm:mb-0">
                     <TodoQuadrant date={currentDate} inputs={inputs} setInputs={setInputs} Todos={Todos} setTodos={setTodos} setQuestion={setQuestion} section='nImp_nUrg' n="i3" />
                 </div>
-                <div className="bg-orange-500 border-0 rounded-xl rounded-tl-none flex flex-col justify-between h-[40vh] sm:h-[25vh] lg:h-[35vh] mb-2 sm:mb-0">
+                <div className="bg-orange-500 border-0 rounded-xl rounded-tl-none flex flex-col justify-between h-[30vh] sm:h-[25vh] lg:h-[35vh] mb-2 sm:mb-0">
                     <TodoQuadrant date={currentDate} inputs={inputs} setInputs={setInputs} Todos={Todos} setTodos={setTodos} setQuestion={setQuestion} section='nImp_Urg' n="i4" />
                 </div>
 
             </div>
 
             {/* Enhanced Visible Progress Bar */}
-            <div className="px-5 absolute bottom-0 w-full  pb-1">
-                <div className="flex items-center bg-white/20 dark:bg-black/30 backdrop-blur-md rounded-lg p-2 border border-white/30 shadow-lg">
-                    <div className="flex gap-2 items-center space-x-3 flex-1">
-                        <div className="flex flex-col items-center min-w-0">
-                            <div className="text-sm font-bold text-green-300 mb-1">Important & Urgent</div>
-                            <div className="w-8 bg-green-900/50 rounded-full h-2 shadow-inner">
-                                <div className="bg-linear-to-r from-green-400 to-green-500 h-2 rounded-full transition-all duration-500 shadow-sm"
-                                    style={{ width: `${progressData.Imp_Urg}%` }}></div>
-                            </div>
-                            <div className="text-sm font-bold text-green-300 mt-1">
-                                {progressData.Imp_Urg}%
-                            </div>
-                        </div>
+            <div className="px-1 sm:px-5 fixed bottom-0 left-0 right-0 w-full pb-1 sm:pb-1">
+                <div className="flex flex-col sm:flex-row items-center bg-white/20 dark:bg-black/30 backdrop-blur-md rounded-lg p-2 sm:p-2 border border-white/30 shadow-lg gap-2 sm:gap-0">
+                    <div className="flex flex-nowrap gap-2 sm:gap-2 items-center justify-center sm:space-x-3 flex-1">
+                        <div className="flex flex-col items-center min-w-0 w-20 sm:w-auto">
+                             <div className="text-xs sm:text-sm font-bold text-green-300 mb-1 text-center leading-tight">
+                                 <span className="block sm:hidden">Do First</span>
+                                 <span className="hidden sm:block">Important & Urgent</span>
+                             </div>
+                             <div className="w-12 sm:w-8 bg-green-900/50 rounded-full h-2 shadow-inner">
+                                 <div className="bg-linear-to-r from-green-400 to-green-500 h-2 rounded-full transition-all duration-500 shadow-sm"
+                                     style={{ width: `${progressData.Imp_Urg}%` }}></div>
+                             </div>
+                             <div className="text-xs sm:text-sm font-bold text-green-300 mt-1">
+                                 {progressData.Imp_Urg}%
+                             </div>
+                         </div>
 
-                        <div className="flex flex-col items-center min-w-0">
-                            <div className="text-sm font-bold text-orange-300 mb-1"><span className="line-through ">Important</span> but Urgent</div>
-                            <div className="w-8 bg-orange-900/50 rounded-full h-2 shadow-inner">
-                                <div className="bg-linear-to-r from-orange-400 to-orange-500 h-2 rounded-full transition-all duration-500 shadow-sm"
-                                    style={{ width: `${progressData.nImp_Urg}%` }}></div>
-                            </div>
-                            <div className="text-sm font-bold text-orange-300 mt-1">
-                                {progressData.nImp_Urg}%
-                            </div>
-                        </div>
+                        <div className="flex flex-col items-center min-w-0 w-20 sm:w-auto">
+                             <div className="text-xs sm:text-sm font-bold text-orange-300 mb-1 text-center leading-tight">
+                                 <span className="block sm:hidden">Schedule</span>
+                                 <span className="hidden sm:block"><span className="line-through ">Important</span> but Urgent</span>
+                             </div>
+                             <div className="w-12 sm:w-8 bg-orange-900/50 rounded-full h-2 shadow-inner">
+                                 <div className="bg-linear-to-r from-orange-400 to-orange-500 h-2 rounded-full transition-all duration-500 shadow-sm"
+                                     style={{ width: `${progressData.nImp_Urg}%` }}></div>
+                             </div>
+                             <div className="text-xs sm:text-sm font-bold text-orange-300 mt-1">
+                                 {progressData.nImp_Urg}%
+                             </div>
+                         </div>
 
-                        <div className="flex flex-col items-center min-w-0">
-                            <div className="text-sm font-bold text-yellow-300 mb-1">Important but <span className="line-through">Urgent</span></div>
-                            <div className="w-8 bg-yellow-900/50 rounded-full h-2 shadow-inner">
-                                <div className="bg-linear-to-r from-yellow-400 to-yellow-500 h-2 rounded-full transition-all duration-500 shadow-sm"
-                                    style={{ width: `${progressData.Imp_nUrg}%` }}></div>
-                            </div>
-                            <div className="text-sm font-bold text-yellow-300 mt-1">
-                                {progressData.Imp_nUrg}%
-                            </div>
-                        </div>
+                        <div className="flex flex-col items-center min-w-0 w-20 sm:w-auto">
+                             <div className="text-xs sm:text-sm font-bold text-yellow-300 mb-1 text-center leading-tight">
+                                 <span className="block sm:hidden">Delegate</span>
+                                 <span className="hidden sm:block">Important but <span className="line-through">Urgent</span></span>
+                             </div>
+                             <div className="w-12 sm:w-8 bg-yellow-900/50 rounded-full h-2 shadow-inner">
+                                 <div className="bg-linear-to-r from-yellow-400 to-yellow-500 h-2 rounded-full transition-all duration-500 shadow-sm"
+                                     style={{ width: `${progressData.Imp_nUrg}%` }}></div>
+                             </div>
+                             <div className="text-xs sm:text-sm font-bold text-yellow-300 mt-1">
+                                 {progressData.Imp_nUrg}%
+                             </div>
+                         </div>
 
-                        <div className="flex flex-col items-center min-w-0">
-                            <div className="text-sm font-bold text-gray-300 mb-1"> <span className="line-through">Important</span> and <span className="line-through">Urgent</span></div>
-                            <div className="w-8 bg-gray-900/50 rounded-full h-2 shadow-inner">
-                                <div className="bg-linear-to-r from-gray-400 to-gray-500 h-2 rounded-full transition-all duration-500 shadow-sm"
-                                    style={{ width: `${progressData.nImp_nUrg}%` }}></div>
-                            </div>
-                            <div className="text-sm font-bold text-gray-300 mt-1">
-                                {progressData.nImp_nUrg}%
-                            </div>
-                        </div>
+                        <div className="flex flex-col items-center min-w-0 w-20 sm:w-auto">
+                             <div className="text-xs sm:text-sm font-bold text-gray-300 mb-1 text-center leading-tight">
+                                 <span className="block sm:hidden">Eliminate</span>
+                                 <span className="hidden sm:block"><span className="line-through">Important</span> and <span className="line-through">Urgent</span></span>
+                             </div>
+                             <div className="w-12 sm:w-8 bg-gray-900/50 rounded-full h-2 shadow-inner">
+                                 <div className="bg-linear-to-r from-gray-400 to-gray-500 h-2 rounded-full transition-all duration-500 shadow-sm"
+                                     style={{ width: `${progressData.nImp_nUrg}%` }}></div>
+                             </div>
+                             <div className="text-xs sm:text-sm font-bold text-gray-300 mt-1">
+                                 {progressData.nImp_nUrg}%
+                             </div>
+                         </div>
                     </div>
 
 
-                    <div className="w-[62%] rounded-xl py-5 flex">
+                    <div className="w-full sm:w-[62%] rounded-xl py-2 sm:py-5 flex flex-col sm:flex-row gap-1 sm:gap-0">
 
-                        <div className="flex items-center bg-white/10 backdrop-blur-md text-gray-800 border border-white/20 w-1/3 mx-1 rounded-lg shadow-lg hover:bg-white/15 transition-all duration-200">
+                        <div className="flex items-center bg-white/10 backdrop-blur-md text-gray-800 border border-white/20 w-full sm:w-1/3 mx-1 rounded-lg shadow-lg hover:bg-white/15 transition-all duration-200">
                             <input
-                                className="grow p-2 border-none bg-transparent focus:ring-0 focus:outline-none placeholder-gray-600 text-black"
-                                placeholder="Enter your prompt..."
+                                className="grow p-2 border-none bg-transparent focus:ring-0 focus:outline-none placeholder-gray-600 text-black text-sm sm:text-base"
+                                placeholder="Ask AI about your tasks..."
                                 value={question}
                                 onChange={(e) => { setQuestion(e.target.value) }}
                                 type="text"
@@ -244,7 +256,7 @@ const Todo_matrix = ({ Todos, date1, setTodos }) => {
                             />
 
                             <button onClick={() => { handleAsk() }} className="p-2 hover:bg-white/20 focus:outline-none rounded-r-lg transition-colors duration-150" type="submit">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" className="h-6 w-6 text-blue-500 hover:text-blue-600" viewBox="0 -0.5 25 25" >
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" className="h-5 w-5 sm:h-6 sm:w-6 text-blue-500 hover:text-blue-600" viewBox="0 -0.5 25 25" >
                                     <g strokeWidth="0" id="SVGRepo_bgCarrier"></g>
                                     <g strokeLinejoin="round" strokeLinecap="round" id="SVGRepo_tracerCarrier" ></g>
                                     <g id="SVGRepo_iconCarrier">
@@ -253,19 +265,21 @@ const Todo_matrix = ({ Todos, date1, setTodos }) => {
                                 </svg>
                             </button>
                         </div>
-                        <div className="w-full items-center flex justify-center text-center bg-white/10 backdrop-blur-md text-black border border-white/20 mx-1 rounded-lg shadow-lg hover:bg-white/15 transition-all duration-200">
-                            {animatedText}
-                            {loading && <div className="animate-pulse text-center text-blue-700">AI is generating response...</div>}
+                        <div className="w-full items-center flex justify-center text-center bg-white/10 backdrop-blur-md text-black border border-white/20 mx-1 rounded-lg shadow-lg hover:bg-white/15 transition-all duration-200 min-h-[40px] p-1">
+                            <div className="w-full text-xs sm:text-base">
+                                {animatedText}
+                                {loading && <div className="animate-pulse text-center text-blue-700">AI is generating response...</div>}
+                            </div>
                         </div>
 
                     </div>
 
 
-                    <div className="ml-4 pl-4 border-l border-white/30 flex flex-col items-center">
-                        <div className="text-sm font-bold text-indigo-300 mb-1">TOTAL</div>
-                        <div className="relative w-8 h-8">
+                    <div className="w-full sm:w-auto sm:ml-4 sm:pl-4 sm:border-l sm:border-white/30 flex flex-col items-center justify-center mt-2 sm:mt-0">
+                        <div className="text-sm sm:text-sm font-bold text-indigo-300 mb-1">TOTAL</div>
+                        <div className="relative w-8 h-2 sm:w-8 sm:h-8">
                             <div className="absolute inset-0 flex items-center justify-center">
-                                <span className="text-lg font-bold text-indigo-300 drop-shadow-sm">
+                                <span className="text-sm sm:text-lg font-bold text-indigo-300 drop-shadow-sm">
                                     {progressData.total}%
                                 </span>
                             </div>
