@@ -3,7 +3,7 @@ import { useSortable } from "@dnd-kit/sortable"
 import { CSS } from "@dnd-kit/utilities";
 import { useState } from "react";
 import { v4 as uuidv4 } from 'uuid';
-const TodoCard = ({ todo, date, Todos, setTodos, inputs, setInputs, n, section, Ndate, Pdate ,setQuestion}) => {
+const TodoCard = ({ todo, date, Todos, setTodos, inputs, setInputs, n, section, Ndate, Pdate, setQuestion }) => {
     const {
         attributes,
         listeners,
@@ -26,7 +26,6 @@ const TodoCard = ({ todo, date, Todos, setTodos, inputs, setInputs, n, section, 
         tomorrow.setDate(tomorrow.getDate() + 1);
         const tomorrowString = tomorrow.toISOString().split('T')[0];
 
-        // Remove from current date
         const updatedTodos = {
             ...Todos,
             [date]: {
@@ -35,7 +34,6 @@ const TodoCard = ({ todo, date, Todos, setTodos, inputs, setInputs, n, section, 
             }
         };
 
-        // Initialize tomorrow if not exists
         if (!updatedTodos[tomorrowString]) {
             updatedTodos[tomorrowString] = {
                 Imp_Urg: [],
@@ -45,7 +43,6 @@ const TodoCard = ({ todo, date, Todos, setTodos, inputs, setInputs, n, section, 
             };
         }
 
-        // Add to tomorrow's section
         updatedTodos[tomorrowString] = {
             ...updatedTodos[tomorrowString],
             [section]: [...(updatedTodos[tomorrowString][section] || []), { ...todo, isDone: false }] // Reset isDone to false
@@ -63,7 +60,6 @@ const TodoCard = ({ todo, date, Todos, setTodos, inputs, setInputs, n, section, 
             futureDate.setDate(futureDate.getDate() + i);
             const futureString = futureDate.toISOString().split('T')[0];
 
-            // Initialize date if not exists
             if (!updatedTodos[futureString]) {
                 updatedTodos[futureString] = {
                     Imp_Urg: [],
@@ -73,11 +69,9 @@ const TodoCard = ({ todo, date, Todos, setTodos, inputs, setInputs, n, section, 
                 };
             }
 
-            // Check if a todo with the same title already exists in the section
             const existing = updatedTodos[futureString][section]?.find(t => t.title === todo.title);
-            if (existing) continue; // Skip if already exists
+            if (existing) continue;
 
-            // Add to future day's section
             updatedTodos[futureString] = {
                 ...updatedTodos[futureString],
                 [section]: [...(updatedTodos[futureString][section] || []), { ...todo, id: uuidv4(), isDone: false }] // Unique ID for repeats
@@ -93,7 +87,6 @@ const TodoCard = ({ todo, date, Todos, setTodos, inputs, setInputs, n, section, 
         <div ref={setNodeRef} style={style} className="bg-white/10 relative backdrop-blur-lg rounded-xl shadow-2xl p-2 sm:p-3 lg:p-4 flex justify-between items-center hover:bg-white/20 hover:shadow-3xl mx-0 sm:mx-0.5 lg:mx-1 my-0.5  transition-all duration-300">
             <div className="flex items-center space-x-2">
 
-                {/* grap the card btn */}
                 <div {...attributes} {...listeners} className="cursor-grab active:cursor-grabbing p-1 hover:bg-white/10 rounded">
                     <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 8h16M4 16h16" />
@@ -145,8 +138,7 @@ const TodoCard = ({ todo, date, Todos, setTodos, inputs, setInputs, n, section, 
                             d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325"
                         ></path>
                     </svg>
-                    {/* Edit */}
-               </button>
+                </button>
                 <button
                     onClick={() => {
                         const newTodos = {

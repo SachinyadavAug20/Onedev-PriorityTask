@@ -39,7 +39,7 @@ Analyze only unfinished tasks first, grouped by quadrant
 
 Answer user query first priority
 
-Length must be 40–50 words
+Length must be 20–25 words
 
 Output plain text only (no markdown, no symbols, no bullet points)
 

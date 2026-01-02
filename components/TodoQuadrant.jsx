@@ -9,7 +9,6 @@ import { ToastContainer } from 'react-toastify';
 import { Bounce } from 'react-toastify';
 import { toast } from 'react-toastify';
 
-// Dynamic import to prevent SSR of draggable components
 const TodoCard = dynamic(() => import('./TodoCard'), {
     ssr: false,
     loading: () => (
@@ -29,7 +28,6 @@ const TodoCard = dynamic(() => import('./TodoCard'), {
 const TodoQuadrant = ({ Todos, setTodos, inputs, setInputs, section, n, date, setQuestion }) => {
     const [mounted, setMounted] = useState(true);
 
-    // Auto-create missing date entries
     useEffect(() => {
         if (Todos && !Todos[date]) {
             setTodos(prevTodos => ({
@@ -65,7 +63,6 @@ const TodoQuadrant = ({ Todos, setTodos, inputs, setInputs, section, n, date, se
     };
 
     if (!mounted) {
-        // Render loading skeleton on server and initial client render
         return (
             <div className="flex flex-col h-full justify-between">
                 <div className="TODOS flex mx-0.5 sm:mx-1 lg:mx-2 py-1 sm:py-2 px-0.5 sm:px-1 h-full my-0.5 sm:my-1 flex-col gap-0.5 sm:gap-1 overflow-auto">
@@ -79,13 +76,11 @@ const TodoQuadrant = ({ Todos, setTodos, inputs, setInputs, section, n, date, se
                     }}
                           onKeyDown={(e) => {
                               if (e.key === 'Enter') {
-                                  // Loading state - no action needed
                               }
                           }}
                         className="block w-full ps-6 pe-2 py-1.5 sm:py-2 text-xs sm:text-base border-0 border-white/30 text-heading rounded-lg focus:ring-brand focus:border-brand shadow-lg sm:shadow-xl placeholder:text-sm sm:placeholder:text-xl hover:font-bold" placeholder="Add a todo" />
                     <lord-icon
                         onClick={(() => {
-                            // Loading state - no action needed
                         })}
                         src="https://cdn.lordicon.com/navborva.json"
                         colors="primary:#121331,secondary:#000000"
@@ -108,7 +103,7 @@ const TodoQuadrant = ({ Todos, setTodos, inputs, setInputs, section, n, date, se
                 >
                     <SortableContext items={(Todos && Todos[date] && Todos[date][section]) || []} strategy={verticalListSortingStrategy}>
                         {((Todos && Todos[date] && Todos[date][section])?.length || 0) === 0 ? (
-                            <div className="flex flex-col items-center h-20 sm:h-24 lg:h-32 justify-center p-3 sm:p-4 lg:p-6 text-center bg-white/5 backdrop-blur-sm rounded-xl border border-white/20">
+                            <div className="flex h-full flex-col items-center sm:h-24 lg:h-32 justify-center p-3 sm:p-4 lg:p-6 text-center bg-white/5 backdrop-blur-sm rounded-xl border border-white/20">
                                 {section === 'Imp_Urg' && (
                                     <>
                                         <div className="text-xl sm:text-2xl flex items-center font-bold text-red-700 mb-2">

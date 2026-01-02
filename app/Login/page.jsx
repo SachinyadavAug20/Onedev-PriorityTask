@@ -21,8 +21,6 @@ const page = () => {
                 transition: Bounce,
             });
         }, 300);
-        console.log(session)
-        console.log(session.user.image)
 
         return (
             <div>
@@ -72,7 +70,7 @@ const page = () => {
             <div className="border rounded-md w-full max-w-sm mx-1 bg-white p-4 sm:p-6 border-violet-600 dark:bg-gray-900/60" id="login-model">
 
                 <p className="text-xl sm:text-2xl font-bold dark:text-white">Login to Continue</p>
-                <p className="text-sm sm:text-base dark:text-gray-200">It will take less than 2 minutes 1 second :)</p>
+                <p className="text-sm sm:text-base dark:text-gray-200">It will take less than 2 minutes 23 second :)</p>
 
                 <div className="mt-4">
                     <button onClick={() => { signIn("google") }} className="w-full text-center py-2 my-3 border flex items-center justify-center border-slate-200 rounded-lg text-slate-700 hover:border-slate-400 hover:text-slate-900 hover:shadow transition duration-150">
@@ -92,5 +90,5 @@ const page = () => {
         </div>
     )
 }
-
 export default page
+

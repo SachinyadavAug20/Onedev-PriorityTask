@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import TodoQuadrant from "./TodoQuadrant";
 import { useSession } from "next-auth/react";
+import { consumeDynamicAccess } from "next/dist/server/app-render/dynamic-rendering";
 
 const Todo_matrix = ({ Todos, date1, setTodos }) => {
     const [inputs, setInputs] = useState({ i1: "", i2: "", i3: "", i4: "" })
@@ -16,17 +17,24 @@ const Todo_matrix = ({ Todos, date1, setTodos }) => {
 
 
     useEffect(() => {
-        setAnimatedText("");  // Reset
+        // Clean the response locally without modifying state
+        const cleanedResponse = response.replace("undefined", "").trim();
+
+        setAnimatedText("");  // Reset animation
         let index = 0;
+        let currentText = "";  // Local variable to build text
+
         const interval = setInterval(() => {
-            if (index < response.length) {
-                setAnimatedText((prev) => prev + response[index]);
+            if (index < cleanedResponse.length) {
+                currentText += cleanedResponse[index];  // Build locally
+                setAnimatedText(currentText);  // Set complete substring
                 index++;
             } else {
                 clearInterval(interval);
             }
-        }, 25);  // 
-        return () => clearInterval(interval);  // Cleanup
+        }, 20);
+
+        return () => clearInterval(interval);
     }, [response]);
 
 
@@ -49,7 +57,6 @@ const Todo_matrix = ({ Todos, date1, setTodos }) => {
             }
             const data = await res.json();
             setResponse(data.response || "Error occurred")
-            console.log(data)
         } catch (error) {
             setResponse("API Error: " + error.message)
         } finally {
@@ -177,65 +184,64 @@ const Todo_matrix = ({ Todos, date1, setTodos }) => {
 
             </div>
 
-            {/* Enhanced Visible Progress Bar */}
             <div className="px-1 sm:px-5 fixed bottom-0 left-0 right-0 w-full pb-1 sm:pb-1">
                 <div className="flex flex-col sm:flex-row items-center bg-white/20 dark:bg-black/30 backdrop-blur-md rounded-lg p-2 sm:p-2 border border-white/30 shadow-lg gap-2 sm:gap-0">
                     <div className="flex flex-nowrap gap-2 sm:gap-2 items-center justify-center sm:space-x-3 flex-1">
                         <div className="flex flex-col items-center min-w-0 w-20 sm:w-auto">
-                             <div className="text-xs sm:text-sm font-bold text-green-300 mb-1 text-center leading-tight">
-                                 <span className="block sm:hidden">Do First</span>
-                                 <span className="hidden sm:block">Important & Urgent</span>
-                             </div>
-                             <div className="w-12 sm:w-8 bg-green-900/50 rounded-full h-2 shadow-inner">
-                                 <div className="bg-linear-to-r from-green-400 to-green-500 h-2 rounded-full transition-all duration-500 shadow-sm"
-                                     style={{ width: `${progressData.Imp_Urg}%` }}></div>
-                             </div>
-                             <div className="text-xs sm:text-sm font-bold text-green-300 mt-1">
-                                 {progressData.Imp_Urg}%
-                             </div>
-                         </div>
+                            <div className="text-xs sm:text-sm font-bold text-green-300 mb-1 text-center leading-tight">
+                                <span className="block sm:hidden">Do First</span>
+                                <span className="hidden sm:block">Important & Urgent</span>
+                            </div>
+                            <div className="w-12 sm:w-8 bg-green-900/50 rounded-full h-2 shadow-inner">
+                                <div className="bg-linear-to-r from-green-400 to-green-500 h-2 rounded-full transition-all duration-500 shadow-sm"
+                                    style={{ width: `${progressData.Imp_Urg}%` }}></div>
+                            </div>
+                            <div className="text-xs sm:text-sm font-bold text-green-300 mt-1">
+                                {progressData.Imp_Urg}%
+                            </div>
+                        </div>
 
                         <div className="flex flex-col items-center min-w-0 w-20 sm:w-auto">
-                             <div className="text-xs sm:text-sm font-bold text-orange-300 mb-1 text-center leading-tight">
-                                 <span className="block sm:hidden">Schedule</span>
-                                 <span className="hidden sm:block"><span className="line-through ">Important</span> but Urgent</span>
-                             </div>
-                             <div className="w-12 sm:w-8 bg-orange-900/50 rounded-full h-2 shadow-inner">
-                                 <div className="bg-linear-to-r from-orange-400 to-orange-500 h-2 rounded-full transition-all duration-500 shadow-sm"
-                                     style={{ width: `${progressData.nImp_Urg}%` }}></div>
-                             </div>
-                             <div className="text-xs sm:text-sm font-bold text-orange-300 mt-1">
-                                 {progressData.nImp_Urg}%
-                             </div>
-                         </div>
+                            <div className="text-xs sm:text-sm font-bold text-orange-300 mb-1 text-center leading-tight">
+                                <span className="block sm:hidden">Schedule</span>
+                                <span className="hidden sm:block"><span className="line-through ">Important</span> but Urgent</span>
+                            </div>
+                            <div className="w-12 sm:w-8 bg-orange-900/50 rounded-full h-2 shadow-inner">
+                                <div className="bg-linear-to-r from-orange-400 to-orange-500 h-2 rounded-full transition-all duration-500 shadow-sm"
+                                    style={{ width: `${progressData.nImp_Urg}%` }}></div>
+                            </div>
+                            <div className="text-xs sm:text-sm font-bold text-orange-300 mt-1">
+                                {progressData.nImp_Urg}%
+                            </div>
+                        </div>
 
                         <div className="flex flex-col items-center min-w-0 w-20 sm:w-auto">
-                             <div className="text-xs sm:text-sm font-bold text-yellow-300 mb-1 text-center leading-tight">
-                                 <span className="block sm:hidden">Delegate</span>
-                                 <span className="hidden sm:block">Important but <span className="line-through">Urgent</span></span>
-                             </div>
-                             <div className="w-12 sm:w-8 bg-yellow-900/50 rounded-full h-2 shadow-inner">
-                                 <div className="bg-linear-to-r from-yellow-400 to-yellow-500 h-2 rounded-full transition-all duration-500 shadow-sm"
-                                     style={{ width: `${progressData.Imp_nUrg}%` }}></div>
-                             </div>
-                             <div className="text-xs sm:text-sm font-bold text-yellow-300 mt-1">
-                                 {progressData.Imp_nUrg}%
-                             </div>
-                         </div>
+                            <div className="text-xs sm:text-sm font-bold text-yellow-300 mb-1 text-center leading-tight">
+                                <span className="block sm:hidden">Delegate</span>
+                                <span className="hidden sm:block">Important but <span className="line-through">Urgent</span></span>
+                            </div>
+                            <div className="w-12 sm:w-8 bg-yellow-900/50 rounded-full h-2 shadow-inner">
+                                <div className="bg-linear-to-r from-yellow-400 to-yellow-500 h-2 rounded-full transition-all duration-500 shadow-sm"
+                                    style={{ width: `${progressData.Imp_nUrg}%` }}></div>
+                            </div>
+                            <div className="text-xs sm:text-sm font-bold text-yellow-300 mt-1">
+                                {progressData.Imp_nUrg}%
+                            </div>
+                        </div>
 
                         <div className="flex flex-col items-center min-w-0 w-20 sm:w-auto">
-                             <div className="text-xs sm:text-sm font-bold text-gray-300 mb-1 text-center leading-tight">
-                                 <span className="block sm:hidden">Eliminate</span>
-                                 <span className="hidden sm:block"><span className="line-through">Important</span> and <span className="line-through">Urgent</span></span>
-                             </div>
-                             <div className="w-12 sm:w-8 bg-gray-900/50 rounded-full h-2 shadow-inner">
-                                 <div className="bg-linear-to-r from-gray-400 to-gray-500 h-2 rounded-full transition-all duration-500 shadow-sm"
-                                     style={{ width: `${progressData.nImp_nUrg}%` }}></div>
-                             </div>
-                             <div className="text-xs sm:text-sm font-bold text-gray-300 mt-1">
-                                 {progressData.nImp_nUrg}%
-                             </div>
-                         </div>
+                            <div className="text-xs sm:text-sm font-bold text-gray-300 mb-1 text-center leading-tight">
+                                <span className="block sm:hidden">Eliminate</span>
+                                <span className="hidden sm:block"><span className="line-through">Important</span> and <span className="line-through">Urgent</span></span>
+                            </div>
+                            <div className="w-12 sm:w-8 bg-gray-900/50 rounded-full h-2 shadow-inner">
+                                <div className="bg-linear-to-r from-gray-400 to-gray-500 h-2 rounded-full transition-all duration-500 shadow-sm"
+                                    style={{ width: `${progressData.nImp_nUrg}%` }}></div>
+                            </div>
+                            <div className="text-xs sm:text-sm font-bold text-gray-300 mt-1">
+                                {progressData.nImp_nUrg}%
+                            </div>
+                        </div>
                     </div>
 
 
@@ -256,13 +262,15 @@ const Todo_matrix = ({ Todos, date1, setTodos }) => {
                             />
 
                             <button onClick={() => { handleAsk() }} className="p-2 hover:bg-white/20 focus:outline-none rounded-r-lg transition-colors duration-150" type="submit">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" className="h-5 w-5 sm:h-6 sm:w-6 text-blue-500 hover:text-blue-600" viewBox="0 -0.5 25 25" >
-                                    <g strokeWidth="0" id="SVGRepo_bgCarrier"></g>
-                                    <g strokeLinejoin="round" strokeLinecap="round" id="SVGRepo_tracerCarrier" ></g>
-                                    <g id="SVGRepo_iconCarrier">
-                                        <path strokeLinejoin="round" strokeLinecap="round" strokeWidth="1.5" stroke="currentColor" d="M18.455 9.8834L7.063 4.1434C6.76535 3.96928 6.40109 3.95274 6.08888 4.09916C5.77667 4.24558 5.55647 4.53621 5.5 4.8764C5.5039 4.98942 5.53114 5.10041 5.58 5.2024L7.749 10.4424C7.85786 10.7903 7.91711 11.1519 7.925 11.5164C7.91714 11.8809 7.85789 12.2425 7.749 12.5904L5.58 17.8304C5.53114 17.9324 5.5039 18.0434 5.5 18.1564C5.55687 18.4961 5.77703 18.7862 6.0889 18.9323C6.40078 19.0785 6.76456 19.062 7.062 18.8884L18.455 13.1484C19.0903 12.8533 19.4967 12.2164 19.4967 11.5159C19.4967 10.8154 19.0903 10.1785 18.455 9.8834V9.8834Z" clipRule="evenodd" fillRule="evenodd" ></path>
-                                    </g>
-                                </svg>
+                                {loading &&
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" className="h-5 w-5 sm:h-6 sm:w-6 text-blue-500 hover:text-blue-600" viewBox="0 -0.5 25 25" >
+                                        <g strokeWidth="0" id="SVGRepo_bgCarrier"></g>
+                                        <g strokeLinejoin="round" strokeLinecap="round" id="SVGRepo_tracerCarrier" ></g>
+                                        <g id="SVGRepo_iconCarrier">
+                                            <path strokeLinejoin="round" strokeLinecap="round" strokeWidth="1.5" stroke="currentColor" d="M18.455 9.8834L7.063 4.1434C6.76535 3.96928 6.40109 3.95274 6.08888 4.09916C5.77667 4.24558 5.55647 4.53621 5.5 4.8764C5.5039 4.98942 5.53114 5.10041 5.58 5.2024L7.749 10.4424C7.85786 10.7903 7.91711 11.1519 7.925 11.5164C7.91714 11.8809 7.85789 12.2425 7.749 12.5904L5.58 17.8304C5.53114 17.9324 5.5039 18.0434 5.5 18.1564C5.55687 18.4961 5.77703 18.7862 6.0889 18.9323C6.40078 19.0785 6.76456 19.062 7.062 18.8884L18.455 13.1484C19.0903 12.8533 19.4967 12.2164 19.4967 11.5159C19.4967 10.8154 19.0903 10.1785 18.455 9.8834V9.8834Z" clipRule="evenodd" fillRule="evenodd" ></path>
+                                        </g>
+                                    </svg>
+                                }
                             </button>
                         </div>
                         <div className="w-full items-center flex justify-center text-center bg-white/10 backdrop-blur-md text-black border border-white/20 mx-1 rounded-lg shadow-lg hover:bg-white/15 transition-all duration-200 min-h-[40px] p-1">
