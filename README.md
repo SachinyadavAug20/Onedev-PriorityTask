@@ -35,19 +35,23 @@ SignIn by google and github works
 AI feature is connected
 dropdown for each card for productive use case
 MongoDB and localstorage both works
+Deployed to versel
+Responsive for mobile
+Fixed AI undefined error
 
 ### what broken : 
-User dashboard is pending
-Ai is giving undefined behavour
-Unresponsive on mobile
+AI box is explaning
 
 ### what plan : 
 Added more productive features
-fix AI
+UI stabishing
 
 ---
 
 ## 📅 Project Timeline
+
+### as on 2 Jan 2026
+![Preview 2 Jan](Documentations/Screenshots_and_gifs/12.gif)
 
 ### as on 1 Jan 2026
 ![Preview 1 Jan](Documentations/Screenshots_and_gifs/11.gif)
