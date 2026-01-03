@@ -49,7 +49,7 @@ const TodoCard = ({ todo, date, Todos, setTodos, inputs, setInputs, n, section, 
         };
 
         setTodos(updatedTodos);
-        localStorage.setItem('Todos', JSON.stringify(updatedTodos));
+        // localStorage.setItem('Todos', JSON.stringify(updatedTodos));
     }
 
     const handleRepeatDays = (days) => {
@@ -79,7 +79,7 @@ const TodoCard = ({ todo, date, Todos, setTodos, inputs, setInputs, n, section, 
         }
 
         setTodos(updatedTodos);
-        localStorage.setItem('Todos', JSON.stringify(updatedTodos));
+        // localStorage.setItem('Todos', JSON.stringify(updatedTodos));
     }
 
     return (
@@ -101,11 +101,14 @@ const TodoCard = ({ todo, date, Todos, setTodos, inputs, setInputs, n, section, 
                             ...Todos[date],
                             [section]: Todos[date][section].map((item) =>
                                 item.id === todo.id ? { ...item, isDone: !item.isDone } : item
-                            )
+                            ).sort((a, b) => {
+                                if (a.isDone === b.isDone) return 0;
+                                return a.isDone ? 1 : -1;
+                            })
                         }
                     };
                     setTodos(newTodos);
-                    localStorage.setItem('Todos', JSON.stringify(newTodos));
+                    // localStorage.setItem('Todos', JSON.stringify(newTodos));
                 }} className="w-5 h-5 accent-green-600 bg-white/10 border border-white/30 rounded-full focus:ring-2 focus:ring-white/50 hover:bg-white/20 transition-all duration-200" />
 
 
@@ -123,7 +126,7 @@ const TodoCard = ({ todo, date, Todos, setTodos, inputs, setInputs, n, section, 
                             }
                         };
                         setTodos(newTodos);
-                        localStorage.setItem('Todos', JSON.stringify(newTodos));
+                        // localStorage.setItem('Todos', JSON.stringify(newTodos));
 
                     }}
                     className="inline-flex items-center justify-center px-4 py-2 bg-blue-600 ease-in-out delay-75 hover:bg-blue-700 text-white text-sm font-medium rounded-md hover:-translate-y-1 hover:scale-110 active:scale-95 transition-all duration-200"
@@ -149,7 +152,7 @@ const TodoCard = ({ todo, date, Todos, setTodos, inputs, setInputs, n, section, 
                             }
                         };
                         setTodos(newTodos);
-                        localStorage.setItem('Todos', JSON.stringify(newTodos));
+                        // localStorage.setItem('Todos', JSON.stringify(newTodos));
                     }}
                     className="flex justify-center items-center gap-2 w-15 h-10 cursor-pointer rounded-md shadow-2xl text-white font-semibold bg-linear-to-r from-[#fb7185] via-[#e11d48] to-[#be123c] hover:shadow-xl hover:shadow-red-500 hover:scale-105 duration-300 hover:from-[#be123c] hover:to-[#fb7185]" >
                     <svg viewBox="0 0 15 15" className="w-5 fill-white">
