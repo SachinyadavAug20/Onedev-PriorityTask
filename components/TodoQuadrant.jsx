@@ -197,10 +197,10 @@ const TodoQuadrant = ({ Todos, setTodos, inputs, setInputs, section, n, date, se
                                 const updatedTodos = [...Todos[date][section]];
                                 updatedTodos[existingTodoIndex] = { ...updatedTodos[existingTodoIndex], title: inputs[n] };
                                 setTodos({ ...Todos, [date]: { ...Todos[date], [section]: updatedTodos } })
-                                localStorage.setItem('Todos', JSON.stringify({ ...Todos, [date]: { ...Todos[date], [section]: updatedTodos } }))
+                                // localStorage.setItem('Todos', JSON.stringify({ ...Todos, [date]: { ...Todos[date], [section]: updatedTodos } }))
                             } else {
                                 setTodos({ ...Todos, [date]: { ...Todos[date], [section]: [{ id: uuidv4(), title: inputs[n], isDone: false }, ...Todos[date][section]] } })
-                                localStorage.setItem('Todos', JSON.stringify({ ...Todos, [date]: { ...Todos[date], [section]: [{ id: uuidv4(), title: inputs[n], isDone: false }, ...Todos[date][section]] } }))
+                                // localStorage.setItem('Todos', JSON.stringify({ ...Todos, [date]: { ...Todos[date], [section]: [{ id: uuidv4(), title: inputs[n], isDone: false }, ...Todos[date][section]] } }))
                             }
 
                             setInputs({ ...inputs, [n]: "" })
@@ -233,10 +233,10 @@ const TodoQuadrant = ({ Todos, setTodos, inputs, setInputs, section, n, date, se
                                 const updatedTodos = [...Todos[date][section]];
                                 updatedTodos[existingTodoIndex] = { ...updatedTodos[existingTodoIndex], title: inputs[n] };
                                 setTodos({ ...Todos, [date]: { ...Todos[date], [section]: updatedTodos } })
-                                localStorage.setItem('Todos', JSON.stringify({ ...Todos, [date]: { ...Todos[date], [section]: updatedTodos } }))
+                                // localStorage.setItem('Todos', JSON.stringify({ ...Todos, [date]: { ...Todos[date], [section]: updatedTodos } }))
                             } else {
                                 setTodos({ ...Todos, [date]: { ...Todos[date], [section]: [{ id: uuidv4(), title: inputs[n], isDone: false }, ...Todos[date][section]] } })
-                                localStorage.setItem('Todos', JSON.stringify({ ...Todos, [date]: { ...Todos[date], [section]: [{ id: uuidv4(), title: inputs[n], isDone: false }, ...Todos[date][section]] } }))
+                                // localStorage.setItem('Todos', JSON.stringify({ ...Todos, [date]: { ...Todos[date], [section]: [{ id: uuidv4(), title: inputs[n], isDone: false }, ...Todos[date][section]] } }))
                             }
 
                             setInputs({ ...inputs, [n]: "" })

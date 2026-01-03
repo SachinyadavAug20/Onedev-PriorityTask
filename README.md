@@ -41,6 +41,7 @@ Fixed AI undefined error
 
 ### what broken : 
 AI box is explaning
+when i login and comeback to / then why the arrow on todo_matrix.jsx which are for navigabtion btw date don't appear and neither ther is anything at its page then i refresh the page and see the arrow come back and now i can navigate a wired glitch
 
 ### what plan : 
 Added more productive features
