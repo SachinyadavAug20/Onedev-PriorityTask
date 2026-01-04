@@ -105,7 +105,11 @@ const Todo_matrix = ({ Todos, date1, setTodos }) => {
         }
         setProgressData(calculateProgress())
     }, [Todos, currentDate])
-
+    const formattedDate = new Date(currentDate).toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+    });
 
     return (
         <>
@@ -128,16 +132,19 @@ const Todo_matrix = ({ Todos, date1, setTodos }) => {
                         })
                     }
                 }}>
-                    <lord-icon
-                        src="https://cdn.lordicon.com/hsetlwbn.json"
-                        trigger="hover"
-                        className="w-6 h-6 sm:w-8 sm:h-8 lg:w-12 lg:h-12"
+
+                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#007BFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 rotate-180"
                     >
-                    </lord-icon>
+                        <circle cx="12" cy="12" r="10" fill=""></circle>
+                        <polyline points="12 8 8 12 12 16"></polyline>
+                        <line x1="16" y1="12" x2="8" y2="12"></line>
+                    </svg>
+
                 </div>
                 <div className="DATE_TODAY text-black flex w-fit px-1 sm:px-2 py-2 sm:py-3 lg:py-5 font-semibold text-lg sm:text-xl lg:text-2xl justify-center items-center text-center">
                     {/* <span>{`${formattedDate}`}</span> */}
-                    <span> <span className="text-green-500 text-shadow-lg/30 text-xl sm:text-2xl lg:text-3xl">{currentDate}</span> </span>
+                    <span> <span className="text-green-500 text-shadow-lg/30 text-xl sm:text-2xl lg:text-3xl">{formattedDate}</span> </span>
+
                 </div>
                 <div className="cursor-pointer" onClick={() => {
 
@@ -156,12 +163,12 @@ const Todo_matrix = ({ Todos, date1, setTodos }) => {
                         })
                     }
                 }}>
-                    <lord-icon
-                        src="https://cdn.lordicon.com/hsetlwbn.json"
-                        trigger="hover"
-                        className="w-6 h-6 sm:w-8 sm:h-8 lg:w-12 lg:h-12"
+                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#007BFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 rotate-180"
                     >
-                    </lord-icon>
+                        <circle cx="12" cy="12" r="10" fill=""></circle>
+                        <polyline points="12 8 8 12 12 16"></polyline>
+                        <line x1="16" y1="12" x2="8" y2="12"></line>
+                    </svg>
                 </div>
             </div>
 

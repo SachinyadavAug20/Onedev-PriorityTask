@@ -66,7 +66,7 @@ const page = () => {
         )
     }
     return (
-        <div className="flex w-full min-h-screen justify-center bg-linear-to-r from-violet-600 via-purple-600 to-pink-600 items-center px-4">
+        <div className="flex w-full min-h-[93vh] justify-center bg-linear-to-r from-violet-600 via-purple-600 to-pink-600 items-center px-4">
             <div className="border rounded-md w-full max-w-sm mx-1 bg-white p-4 sm:p-6 border-violet-600 dark:bg-gray-900/60" id="login-model">
 
                 <p className="text-xl sm:text-2xl font-bold dark:text-white">Login to Continue</p>
