@@ -66,7 +66,7 @@ const Navbar = ({ date}) => {
                                     <div className="pl-2 sm:pl-3 text-center sm:text-left">
                                         <h3 className="text-gray-200 font-semibold text-xs sm:text-sm">
                                         <span className="hidden sm:block">    {session.user.name} </span>
-                                        <span className="block sm:block">    {session.user.name.split(" ")[0]} </span>
+                                        <span className="block sm:hidden">    {session.user.name.split(" ")[0]} </span>
                                         </h3>
                                         <h3 className="bg-clip-text text-transparent bg-linear-to-l from-sky-300 to-blue-600 text-xs font-bold">
                                         <span className="hidden sm:block">    {session.user.email} </span>
