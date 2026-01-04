@@ -119,10 +119,10 @@ const DashboardPage = () => {
                     <div className="bg-white/20 backdrop-blur-md rounded-xl p-6 shadow-lg border border-white/20 hover:bg-white/15 transition-all duration-200">
                         <h2 className="text-xl font-semibold text-gray-800 mb-4">Overall Stats</h2>
                         <div className="space-y-2">
-                            <p className="text-gray-700">Total Tasks: <span className="font-bold text-blue-600">{stats.totalTasks}</span></p>
-                            <p className="text-gray-700">Tasks Completed: <span className="font-bold text-green-600">{stats.completedTasks}</span></p>
-                            <p className="text-gray-700">Tasks Pending: <span className="font-bold text-orange-600">{stats.pendingTasks}</span></p>
-                            <p className="text-gray-700">Productivity Score: <span className="font-bold text-purple-600">{stats.productivityScore}%</span></p>
+                            <p className="text-gray-700">Total Tasks: <span className="font-bold text-blue-800">{stats.totalTasks}</span></p>
+                            <p className="text-gray-700">Tasks Completed: <span className="font-bold text-green-800">{stats.completedTasks}</span></p>
+                            <p className="text-gray-700">Tasks Pending: <span className="font-bold text-orange-800">{stats.pendingTasks}</span></p>
+                            <p className="text-gray-700">Productivity Score: <span className="font-bold text-purple-800">{stats.productivityScore}%</span></p>
                         </div>
                     </div>
 

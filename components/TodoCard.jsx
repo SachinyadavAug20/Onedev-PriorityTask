@@ -203,14 +203,20 @@ const TodoCard = ({ todo, date, Todos, setTodos, inputs, setInputs, n, section, 
                         }
                     </button>
 
-                    <div className={`z-1111 ${dropdown ? "opacity-100 scale-100" : "opacity-0 scale-95 hidden"} bg-white/10 backdrop-blur-xl border border-white/20 rounded-xl text-[12px] sm:text-[16px] shadow-2xl w-70 relative right-0 transition-all duration-200 ease-out transform`}>
+                    <div className={`z-1111 ${dropdown ? "opacity-100 scale-100" : "opacity-0 scale-95 hidden"} bg-white/10 backdrop-blur-xl border border-white/20 rounded-xl text-[12px] sm:text-[16px] shadow-2xl sm:w-70 w-30 relative right-0 transition-all duration-200 ease-out transform`}>
                         <ul className="py-2 text-sm text-gray-800 font-medium">
                             <li className="px-4 py-2 hover:bg-white/20 hover:text-blue-600 transition-colors duration-150 cursor-pointer rounded-lg mx-2">
-                                <button className="flex items-center w-full text-left" onClick={() => { handleWillDoTommorow(); setDropdown(false); }}>
-                                    <svg className="w-4 h-4 mr-3 focus:invert-75 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                <button className="flex items-center w-fit text-left" onClick={() => { handleWillDoTommorow(); setDropdown(false); }}>
+
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2563EB" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" xmlns="http://www.w3.org/2000/svg">
+                                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                                        <line x1="16" y1="2" x2="16" y2="6" />
+                                        <line x1="8" y1="2" x2="8" y2="6" />
+                                        <line x1="3" y1="10" x2="21" y2="10" />
+                                        <path d="M12 14l3 3-3 3" />
+                                        <path d="M9 17h6" />
                                     </svg>
-                                    Will do tomorrow
+                                    <span className="hidden sm:flex">Will do&nbsp;</span>Tomorrow 
                                 </button>
                             </li>
                             <li className="px-4 py-2 hover:bg-white/20 transition-colors duration-150 cursor-pointer rounded-lg mx-2">
@@ -219,15 +225,15 @@ const TodoCard = ({ todo, date, Todos, setTodos, inputs, setInputs, n, section, 
                                         <svg className="w-4 h-4 mr-3 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
                                         </svg>
-                                        Repeat for
+                                        <span className="hidden sm:flex"> Repeat for </span>
                                         <input
                                             type="number"
-                                            className="w-12 mx-2 px-2 py-1 text-xs border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                            className="sm:w-12 w-8 sm:mx-2 mx-0.5 sm:px-2 px-0.5 py-1 text-xs border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                                             value={no_of_days}
                                             onChange={(e) => { setNo_of_days(Math.max(0, parseInt(e.target.value) || 0)) }}
                                             placeholder="0"
                                         />
-                                        days
+                                        <span className="hidden sm:flex">days</span>
                                     </span>
                                     <button
                                         className="ml-2 p-1 bg-green-500 hover:bg-green-600 text-white rounded-full transition-colors duration-150"
@@ -244,7 +250,7 @@ const TodoCard = ({ todo, date, Todos, setTodos, inputs, setInputs, n, section, 
                                     <svg className="w-4 h-4 mr-3 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
                                     </svg>
-                                    Repeat for a week
+                                    <span className="hidden sm:flex">Repeat for a&nbsp;</span>week
                                 </button>
                             </li>
                         </ul>
@@ -253,10 +259,12 @@ const TodoCard = ({ todo, date, Todos, setTodos, inputs, setInputs, n, section, 
                                 className="flex items-center w-full text-left text-sm font-medium text-gray-800 hover:text-red-600 hover:bg-white/20 px-2 py-1 rounded-lg transition-colors duration-150"
                                 onClick={() => { setQuestion(`"${todo.title}" explain`); setDropdown(false); }}
                             >
-                                <svg className="w-4 h-4 mr-3 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5L12 2Z" fill="#7C3AED" />
+                                    <path d="M18 3L19 5L21 6L19 7L18 9L17 7L15 6L17 5L18 3Z" fill="#A78BFA" />
                                 </svg>
-                                Ask about this to AI
+                                Ask&nbsp;<span className="hidden sm:flex">about this to AI </span>
                             </button>
                         </div>
                     </div>
