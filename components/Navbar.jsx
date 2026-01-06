@@ -10,7 +10,7 @@ const Navbar = ({ date }) => {
             <div className={`flex justify-between border-t-0 px-2 sm:px-3 lg:px-5 bg-white/30 backdrop-blur-md border-2 rounded-t-none border-gray-700/50 rounded-lg text-black py-1 sm:py-2 shadow-lg`}>
                 <div className="flex justify-center items-center gap-3">
 
-                    <Link href={"/"}>
+                    <Link href={"/about"}>
                         <div className="LOGO_OF_PAGE font-bold text-shadow-lg font-mono text-lg sm:text-2xl lg:text-3xl flex gap-0.5 sm:gap-1 lg:gap-2 justify-center items-center">
                             <img className="w-6 sm:w-8 lg:w-10" src="/logo.png" alt="Logo" />
                             <div>
@@ -27,15 +27,17 @@ const Navbar = ({ date }) => {
                     </Link>
 
                     <div className="my-auto ">
-                        <div className="sm:flex hidden items-center gap-1 sm:gap-2 px-1.5 sm:px-2 lg:px-3 py-0.5 sm:py-1 bg-white/10 backdrop-blur-md rounded-lg border border-white/20 shadow-sm">
-                            <svg className="invert-90" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <circle cx="12" cy="12" r="10"></circle>
-                                <polyline points="12 6 12 12 16 14"></polyline>
-                            </svg>
-                            <span className="text-[10px] sm:text-xs lg:text-sm font-medium text-white/90">
-                                Today, {date}
-                            </span>
-                        </div>
+                        <Link href="/">
+                            <div className="sm:flex hidden items-center gap-1 sm:gap-2 px-1.5 sm:px-2 lg:px-3 py-0.5 sm:py-1 bg-white/10 backdrop-blur-md rounded-lg border border-white/20 shadow-sm">
+                                <svg className="invert-90" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <polyline points="12 6 12 12 16 14"></polyline>
+                                </svg>
+                                <span className="text-[10px] sm:text-xs lg:text-sm font-medium text-white/90">
+                                    Today, {date}
+                                </span>
+                            </div>
+                        </Link>
                     </div>
                 </div>
                 <div className="flex items-center gap-4 sm:gap-10">

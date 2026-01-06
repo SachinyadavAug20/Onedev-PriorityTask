@@ -133,7 +133,7 @@ const Todo_matrix = ({ Todos, date1, setTodos }) => {
                     }
                 }}>
 
-                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#007BFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 rotate-180"
+                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#007BFF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 rotate-180"
                     >
                         <circle cx="12" cy="12" r="10" fill=""></circle>
                         <polyline points="12 8 8 12 12 16"></polyline>
@@ -163,7 +163,7 @@ const Todo_matrix = ({ Todos, date1, setTodos }) => {
                         })
                     }
                 }}>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#007BFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 rotate-180"
+                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#007BFF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 rotate-180"
                     >
                         <circle cx="12" cy="12" r="10" fill=""></circle>
                         <polyline points="12 8 8 12 12 16"></polyline>
