@@ -141,7 +141,7 @@ const Todo_matrix = ({ Todos, date1, setTodos }) => {
                     </svg>
 
                 </div>
-                <div className="DATE_TODAY text-black flex w-fit px-1 sm:px-2 py-2 sm:py-3 lg:py-5 font-semibold text-lg sm:text-xl lg:text-2xl justify-center items-center text-center">
+                <div className="DATE_TODAY text-black flex w-fit px-1 sm:px-2 py-2 sm:py-3 lg:py-5 font-semibold font-heading text-lg sm:text-xl lg:text-2xl justify-center items-center text-center">
                     {/* <span>{`${formattedDate}`}</span> */}
                     <span> <span className="text-green-500 text-shadow-lg/30 text-xl sm:text-2xl lg:text-3xl">{formattedDate}</span> </span>
 
@@ -194,7 +194,7 @@ const Todo_matrix = ({ Todos, date1, setTodos }) => {
                 <div className="flex flex-col sm:flex-row items-center bg-white/20 dark:bg-black/30 backdrop-blur-md rounded-lg p-2 sm:p-2 border border-white/30 shadow-lg gap-2 sm:gap-0">
                     <div className="flex flex-nowrap gap-2 sm:gap-2 items-center justify-center sm:space-x-3 flex-1">
                         <div className="flex flex-col items-center min-w-0 w-20 sm:w-auto">
-                            <div className="text-xs sm:text-sm font-bold text-green-300 mb-1 text-center leading-tight">
+                            <div className="text-xs sm:text-sm font-bold font-heading text-green-300 mb-1 text-center leading-tight">
                                 <span className="block sm:hidden">Do First</span>
                                 <span className="hidden sm:block">Important & Urgent</span>
                             </div>
@@ -208,7 +208,7 @@ const Todo_matrix = ({ Todos, date1, setTodos }) => {
                         </div>
 
                         <div className="flex flex-col items-center min-w-0 w-20 sm:w-auto">
-                            <div className="text-xs sm:text-sm font-bold text-orange-300 mb-1 text-center leading-tight">
+                            <div className="text-xs sm:text-sm font-bold font-heading text-orange-300 mb-1 text-center leading-tight">
                                 <span className="block sm:hidden">Schedule</span>
                                 <span className="hidden sm:block"><span className="line-through ">Important</span> but Urgent</span>
                             </div>
@@ -222,7 +222,7 @@ const Todo_matrix = ({ Todos, date1, setTodos }) => {
                         </div>
 
                         <div className="flex flex-col items-center min-w-0 w-20 sm:w-auto">
-                            <div className="text-xs sm:text-sm font-bold text-yellow-300 mb-1 text-center leading-tight">
+                            <div className="text-xs sm:text-sm font-bold font-heading text-yellow-300 mb-1 text-center leading-tight">
                                 <span className="block sm:hidden">Delegate</span>
                                 <span className="hidden sm:block">Important but <span className="line-through">Urgent</span></span>
                             </div>
@@ -236,7 +236,7 @@ const Todo_matrix = ({ Todos, date1, setTodos }) => {
                         </div>
 
                         <div className="flex flex-col items-center min-w-0 w-20 sm:w-auto">
-                            <div className="text-xs sm:text-sm font-bold text-gray-300 mb-1 text-center leading-tight">
+                            <div className="text-xs sm:text-sm font-bold font-heading text-gray-300 mb-1 text-center leading-tight">
                                 <span className="block sm:hidden">Eliminate</span>
                                 <span className="hidden sm:block"><span className="line-through">Important</span> and <span className="line-through">Urgent</span></span>
                             </div>
@@ -255,7 +255,7 @@ const Todo_matrix = ({ Todos, date1, setTodos }) => {
 
                         <div className="flex items-center bg-white/10 backdrop-blur-md text-gray-800 border border-white/20 w-full sm:w-1/3 mx-1 rounded-lg shadow-lg hover:bg-white/15 transition-all duration-200">
                             <input
-                                className="grow p-2 border-none bg-transparent focus:ring-0 focus:outline-none placeholder-gray-600 text-black text-sm sm:text-base"
+                                className="grow p-2 border-none bg-transparent focus:ring-0 focus:outline-none placeholder-gray-600 text-black font-body text-sm sm:text-base"
                                 placeholder="Ask AI about your tasks..."
                                 value={question}
                                 onChange={(e) => { setQuestion(e.target.value) }}

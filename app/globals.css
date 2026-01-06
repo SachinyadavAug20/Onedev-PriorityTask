@@ -1,2 +1,19 @@
 @import "tailwindcss";
 
+/* Extend gradient background to overscroll area */
+html, body {
+  background: linear-gradient(135deg, #7c3aed 0%, #a855f7 50%, #ec4899 100%);
+  background-attachment: fixed;
+  min-height: 100vh;
+}
+
+/* Ensure all pages extend the background */
+html {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+

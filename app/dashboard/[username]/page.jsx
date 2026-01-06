@@ -108,16 +108,16 @@ const DashboardPage = () => {
                             className="w-20 h-20 rounded-full border-4 border-white/30 shadow-lg"
                         />
                         <div>
-                            <h1 className="text-3xl font-bold text-gray-900">Welcome, {session.user.name}!</h1>
-                            <p className="text-gray-700 mt-2">Username: {username}</p>
-                            <p className="text-gray-700">Email: {session.user.email}</p>
+                            <h1 className="text-3xl font-bold font-heading text-gray-900">Welcome, {session.user.name}!</h1>
+                            <p className="text-gray-700 font-body mt-2">Username: {username}</p>
+                            <p className="text-gray-700 font-body">Email: {session.user.email}</p>
                         </div>
                     </div>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="bg-white/20 backdrop-blur-md rounded-xl p-6 shadow-lg border border-white/20 hover:bg-white/15 transition-all duration-200">
-                        <h2 className="text-xl font-semibold text-gray-800 mb-4">Overall Stats</h2>
+                        <h2 className="text-xl font-semibold font-heading text-gray-800 mb-4">Overall Stats</h2>
                         <div className="space-y-2">
                             <p className="text-gray-700">Total Tasks: <span className="font-bold text-shadow-lg/20 text-blue-800">{stats.totalTasks}</span></p>
                             <p className="text-gray-700">Tasks Completed: <span className="font-bold text-shadow-lg/20 text-green-800">{stats.completedTasks}</span></p>
@@ -127,7 +127,7 @@ const DashboardPage = () => {
                     </div>
 
                     <div className="bg-white/20 backdrop-blur-md rounded-xl p-6 shadow-lg border border-white/20 hover:bg-white/15 transition-all duration-200">
-                        <h2 className="text-xl font-semibold text-gray-800 mb-4">Quadrant Breakdown</h2>
+                        <h2 className="text-xl font-semibold font-heading text-gray-800 mb-4">Quadrant Breakdown</h2>
                         <div className="space-y-2">
                             {Object.entries(stats.quadrantStats).map(([quad, data]) => (
                                 <div key={quad} className="flex justify-between items-center">
@@ -155,7 +155,7 @@ const DashboardPage = () => {
                     </div>
 
                     <div className="bg-white/20 backdrop-blur-md rounded-xl p-6 shadow-lg border border-white/20 hover:bg-white/15 transition-all duration-200">
-                        <h2 className="text-1xl font-semibold text-gray-800 mb-4">Motivation</h2>
+                        <h2 className="text-1xl font-semibold font-heading text-gray-800 mb-4">Motivation</h2>
                         <p className="text-gray-700 text-xl text-balance italic">
                             &ldquo;{`${quotes[Math.floor(Math.random() * 30)]}`}&rdquo;
                         </p>

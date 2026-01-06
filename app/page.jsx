@@ -1,7 +1,6 @@
-"use client"
+"use client";
+
 import './my.css'
-import Navbar from "@/components/Navbar";
-import { useState, useEffect } from 'react';
 import Todo_matrix from '@/components/Todo_matrix';
 import { useTodo } from '@/lib/TodoContext';
 

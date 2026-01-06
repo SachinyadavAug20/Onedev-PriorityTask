@@ -11,14 +11,12 @@ const Navbar = ({ date }) => {
                 <div className="flex justify-center items-center gap-3">
 
                     <Link href={"/about"}>
-                        <div className="LOGO_OF_PAGE font-bold text-shadow-lg font-mono text-lg sm:text-2xl lg:text-3xl flex gap-0.5 sm:gap-1 lg:gap-2 justify-center items-center">
+                        <div className="LOGO_OF_PAGE font-accent font-bold text-shadow-lg text-lg sm:text-2xl lg:text-3xl flex gap-0.5 sm:gap-1 lg:gap-2 justify-center items-center">
                             <img className="w-6 sm:w-8 lg:w-10" src="/logo.png" alt="Logo" />
                             <div>
-                                {/* Mobile: PT only */}
                                 <span className="block sm:hidden">
                                     <span className="text-[#facc15]">P</span><span className="text-[#64748b]">T</span>
                                 </span>
-                                {/* Desktop: Full PriorityTask */}
                                 <span className="hidden sm:block">
                                     <span className="text-[#facc15]">P</span>riorit<span className="text-[#22c55e]">y</span><span className="text-[#64748b]">T</span>as<span className="text-[#f97316]">k</span>
                                 </span>
@@ -45,7 +43,7 @@ const Navbar = ({ date }) => {
 
                         <div className="SIGN_IN_BBTN flex gap-5">
                             <Link href="/Login">
-                                <button type="button" className="text-black bg-linear-to-r from-cyan-500 to-blue-500 hover:bg-linear-to-bl border rounded-4xl focus:ring-4 focus:outline-none focus:ring-cyan-300 font-semibold font-mono dark:focus:ring-cyan-800  text-xs sm:text-sm px-3 py-2 sm:px-4 sm:py-2.5 text-center leading-5">Login</button>
+                                <button type="button" className="text-black bg-linear-to-r from-cyan-500 to-blue-500 hover:bg-linear-to-bl border rounded-4xl focus:ring-4 focus:outline-none focus:ring-cyan-300 font-semibold font-ui dark:focus:ring-cyan-800  text-xs sm:text-sm px-3 py-2 sm:px-4 sm:py-2.5 text-center leading-5">Login</button>
                             </Link>
 
                         </div>}
@@ -75,7 +73,7 @@ const Navbar = ({ date }) => {
                                 </section>
 
                             </div>
-                            <button type="button" onClick={() => { signOut() }} className="text-black bg-linear-to-r from-cyan-500 to-blue-500 hover:bg-linear-to-bl border rounded-4xl focus:ring-4 focus:outline-none focus:ring-cyan-300 font-semibold font-mono dark:focus:ring-cyan-800  text-xs sm:text-sm px-3 py-2 sm:px-4 sm:py-2.5 text-center leading-5">Sign Out</button>
+                            <button type="button" onClick={() => { signOut() }} className="text-black bg-linear-to-r from-cyan-500 to-blue-500 hover:bg-linear-to-bl border rounded-4xl focus:ring-4 focus:outline-none focus:ring-cyan-300 font-semibold font-ui dark:focus:ring-cyan-800  text-xs sm:text-sm px-3 py-2 sm:px-4 sm:py-2.5 text-center leading-5">Sign Out</button>
 
                         </div>}
 

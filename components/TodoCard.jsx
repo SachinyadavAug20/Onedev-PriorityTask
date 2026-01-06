@@ -112,7 +112,7 @@ const TodoCard = ({ todo, date, Todos, setTodos, inputs, setInputs, n, section, 
                 }} className="w-5 h-5 accent-green-600 bg-white/10 border border-white/30 rounded-full focus:ring-2 focus:ring-white/50 hover:bg-white/20 transition-all duration-200" />
 
 
-                <span className={`text-heading text-[12px] sm:text-[16px] hover:font-bold ${todo.isDone ? 'line-through text-gray-400' : ''}`}>{todo.title}</span>
+                <span className={`text-heading font-body text-[12px] sm:text-[16px] hover:font-bold ${todo.isDone ? 'line-through text-gray-400' : ''}`}>{todo.title}</span>
             </div>
             <div className="flex space-x-0.5 sm:space-x-1 lg:space-x-2 justify-center items-center">
                 <button
