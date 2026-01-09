@@ -85,7 +85,7 @@ const TodoCard = ({ todo, date, Todos, setTodos, inputs, setInputs, n, section, 
     return (
 
         <div ref={setNodeRef} style={style} className="bg-white/10 relative backdrop-blur-lg rounded-xl shadow-2xl p-2 sm:p-3 lg:p-4 flex justify-between items-center hover:bg-white/20 hover:shadow-3xl mx-0 sm:mx-0.5 lg:mx-1 my-0.5  transition-all duration-300">
-            <div className="flex items-center space-x-2">
+            <div className="flex items-center space-x-2 w-fit">
 
                 <div {...attributes} {...listeners} className="cursor-grab active:cursor-grabbing p-1 hover:bg-white/10 rounded">
                     <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -112,7 +112,7 @@ const TodoCard = ({ todo, date, Todos, setTodos, inputs, setInputs, n, section, 
                 }} className="w-5 h-5 accent-green-600 bg-white/10 border border-white/30 rounded-full focus:ring-2 focus:ring-white/50 hover:bg-white/20 transition-all duration-200" />
 
 
-                <span className={`text-heading font-body text-[12px] sm:text-[16px] hover:font-bold ${todo.isDone ? 'line-through text-gray-400' : ''}`}>{todo.title}</span>
+                <span className={`text-heading font-body text-[12px] text-balance sm:text-[16px] hover:font-bold ${todo.isDone ? 'line-through text-gray-400' : ''}`}>{todo.title}</span>
             </div>
             <div className="flex space-x-0.5 sm:space-x-1 lg:space-x-2 justify-center items-center">
                 <button

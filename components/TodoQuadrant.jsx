@@ -74,10 +74,10 @@ const TodoQuadrant = ({ Todos, setTodos, inputs, setInputs, section, n, date, se
                     <input type="text" id="input-group-1" value={inputs[n]} onChange={(e) => {
                         setInputs({ ...inputs, [n]: e.target.value })
                     }}
-                          onKeyDown={(e) => {
-                              if (e.key === 'Enter') {
-                              }
-                          }}
+                        onKeyDown={(e) => {
+                            if (e.key === 'Enter') {
+                            }
+                        }}
                         className="block w-full ps-6 pe-2 py-1.5 sm:py-2 text-xs sm:text-base border-0 border-white/30 text-heading rounded-lg focus:ring-brand focus:border-brand shadow-lg sm:shadow-xl placeholder:text-sm sm:placeholder:text-xl hover:font-bold" placeholder="Add a todo" />
                     <lord-icon
                         onClick={(() => {
@@ -94,7 +94,23 @@ const TodoQuadrant = ({ Todos, setTodos, inputs, setInputs, section, n, date, se
     }
 
     return (
+
+
+
         <div className="flex flex-col h-full justify-between">
+            <ToastContainer
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick={false}
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+                transition={Bounce}
+            />
             <div className="TODOS flex mx-0.5 sm:mx-1 lg:mx-2 py-1 sm:py-2 px-0.5 sm:px-1 flex-1 my-0.5 sm:my-1 flex-col gap-0.5 sm:gap-1 overflow-auto">
                 <DndContext
                     onDragEnd={handleDrag}
@@ -207,7 +223,10 @@ const TodoQuadrant = ({ Todos, setTodos, inputs, setInputs, section, n, date, se
                         }
                     }}
                     className="block w-full ps-6 pe-2 py-2 sm:py-2 text-sm sm:text-base border-0 border-white/30 text-heading rounded-lg focus:ring-brand focus:border-brand shadow-lg sm:shadow-xl placeholder:text-sm sm:placeholder:text-base hover:font-bold" placeholder="Add a todo" />
-                <lord-icon
+
+
+                <svg width="120" height="46" viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg"
+                    className='cursor-pointer absolute right-0'
                     onClick={(() => {
                         if (inputs[n].length < 3) {
                             toast.error('Make Todo more descriptive!', {
@@ -242,12 +261,31 @@ const TodoQuadrant = ({ Todos, setTodos, inputs, setInputs, section, n, date, se
                             setInputs({ ...inputs, [n]: "" })
                         }
                     })}
-                    src="https://cdn.lordicon.com/navborva.json"
-                    colors="primary:#121331,secondary:#000000"
-                    trigger="hover"
-                    className="absolute right-0 w-10 h-10 sm:w-10 sm:h-10 lg:w-12 lg:h-12"
+
                 >
-                </lord-icon>
+                    <defs>
+                        <filter id="shadow" x="-10%" y="-10%" width="120%" height="140%">
+                            <feDropShadow dx="0" dy="4" stdDeviation="3" floodOpacity="0.2" />
+                        </filter>
+                    </defs>
+
+                    <rect x="5" y="5" width="190" height="65" rx="12" fill="#2d3436" filter="url(#shadow)" />
+
+                    <rect x="5" y="5" width="190" height="60" rx="12" fill="#3d4446" />
+
+                    <text x="30" y="42" fontFamily="Arial, sans-serif" fontSize="22" fontWeight="bold" fill="white">ENTER</text>
+
+                    <path d="M165 30 L165 45 L140 45 M140 45 L150 35 M140 45 L150 55"
+                        stroke="white"
+                        strokeWidth="4"
+                        fill="none"
+                        strokeLinecap="round"
+                        strokeLinejoin="round" />
+                </svg>
+
+
+
+
             </div>
         </div>
     );

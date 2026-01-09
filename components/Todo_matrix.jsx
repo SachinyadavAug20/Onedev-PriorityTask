@@ -190,6 +190,8 @@ const Todo_matrix = ({ Todos, date1, setTodos }) => {
 
             </div>
 
+
+
             <div className="px-1 sm:px-5 fixed bottom-0 left-0 right-0 w-full pb-1 sm:pb-1">
                 <div className="flex flex-col sm:flex-row items-center bg-white/20 dark:bg-black/30 backdrop-blur-md rounded-lg p-2 sm:p-2 border border-white/30 shadow-lg gap-2 sm:gap-0">
                     <div className="flex flex-nowrap gap-2 sm:gap-2 items-center justify-center sm:space-x-3 flex-1">
