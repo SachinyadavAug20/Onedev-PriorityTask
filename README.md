@@ -18,12 +18,28 @@ There is a need for a simple system that:
 
 ---
 
-## 💡 Solution
+##  Solution
 
 PriorityTask introduces a **priority-first workflow** where tasks are organized based on their importance.  
 Users can quickly identify high-priority tasks and focus their energy on meaningful work.
 
 The application keeps the interface minimal and distraction-free, making it suitable for students and individual learners.
+
+---
+
+##  Hackathon Conclusion
+
+PriorityTask was developed as a solo project during the Genesis 1.0 Hackathon with the goal of building a usable, real-world productivity tool within a limited time frame.
+
+Over the course of the hackathon, I successfully designed, implemented, and deployed a functional MVP that supports priority-based task management, authentication, persistent storage, and AI-assisted planning. The project demonstrates my ability to take an idea from concept to a live product under time constraints.
+
+Due to the short development window and solo nature of the project, a few UI edge cases and interaction inconsistencies remain. These have been identified and documented and will be addressed in future iterations.
+
+Overall, the hackathon was a valuable learning experience that strengthened my skills in full-stack development, problem scoping, and decision-making under deadlines.
+
+Although the project was not shortlisted among the top submissions, the hackathon experience was extremely valuable. Building PriorityTask as a solo developer helped me strengthen my problem-solving skills, improve my ability to scope features realistically, and gain confidence in shipping a complete product under tight deadlines.
+
+
 
 ---
 
